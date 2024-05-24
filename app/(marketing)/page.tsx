@@ -2,18 +2,18 @@ import { Button } from '@/components/ui/button';
 import { Medal } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import localFont from 'next/font/local';
 import { cn } from '@/lib/utils';
-import { Poppins } from 'next/font/google';
+import { Kanit, Roboto } from 'next/font/google';
 
-const headingFont = localFont({
-  src: '../../public/fonts/CalSans-SemiBold.woff2',
+const headingFont = Kanit({
+  subsets: ['latin'],
+  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
   display: 'swap',
 });
 
-const textFont = Poppins({
+const textFont = Roboto({
   subsets: ['latin'],
-  weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+  weight: ['100', '300', '400', '500', '700', '900'],
   display: 'swap',
 });
 
@@ -35,19 +35,19 @@ const MarketingPage = () => {
         )}
       >
         <div className='text-center flex flex-col justify-center items-center gap-y-8 '>
-          <div className='flex items-center border shadow-sm bg-amber-100 text-amber-700 rounded-full uppercase p-3 pt-4 md:p-5 md:pt-6 md:text-xl'>
+          <div className='flex items-center border shadow-sm bg-amber-100 text-amber-700 rounded-full uppercase p-3 md:p-4  md:text-xl'>
             <Medal className='w-6 h-6 mr-2' />
             Shift Mastery Achieved
           </div>
-          <h1 className='text-6xl font-bold md:text-8xl'>
+          <h1 className='text-6xl font-semibold md:text-8xl'>
             Master Your Schedule
           </h1>
-          <div className='text-2xl md:text-5xl bg-gradient-to-r from-indigo-500 to-pink-500 text-white rounded-md p-2 w-fit pt-3 align-middle'>
+          <div className='text-2xl md:text-5xl bg-gradient-to-r from-indigo-500 to-pink-500 text-white rounded-md p-2 w-fit align-middle italic pr-4 font-semibold'>
             Work Streamlined
           </div>
           <p
             className={cn(
-              'text-sm md:text-xl text-slate-600',
+              'text-sm md:text-xl text-slate-600 md:px-10',
               textFont.className
             )}
           >
@@ -57,7 +57,11 @@ const MarketingPage = () => {
             organization with ShiftSwift.
           </p>
         </div>
-        <Button className='mt-6' size={'lg'} asChild>
+        <Button
+          className='mt-4 px-12 tracking-widest text-lg'
+          size={'lg'}
+          asChild
+        >
           <Link href='/sign-up'>Get Started</Link>
         </Button>
       </div>
