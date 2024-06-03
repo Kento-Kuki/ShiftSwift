@@ -10,33 +10,28 @@ import { useLocalStorage } from 'usehooks-ts';
 import { useQuery } from '@tanstack/react-query';
 import { fetcher } from '@/lib/fetcher';
 import Image from 'next/image';
-import { useState, useEffect } from 'react';
-import { toast } from 'sonner';
 
 interface SidebarProps {
   storageKey?: string;
+  popoverSide?: 'left' | 'right' | 'top' | 'bottom';
+  popoverAlign?: 'start' | 'center' | 'end';
+  popoverSideOffset?: number;
 }
 
-const Sidebar = ({ storageKey = 't-sidebar-state' }: SidebarProps) => {
+const Sidebar = ({
+  storageKey = 't-sidebar-state',
+  popoverSide = 'right',
+  popoverAlign = 'start',
+  popoverSideOffset = 10,
+}: SidebarProps) => {
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
     {}
   );
-  const [clients, setClients] = useState<Client[]>([]);
-
-  const { data, isLoading, error } = useQuery<Client[]>({
+  const { data: clients, isLoading } = useQuery<Client[]>({
     queryKey: ['clients'],
     queryFn: () => fetcher('/api/clients'),
   });
-
-  useEffect(() => {
-    if (data) {
-      setClients(data);
-    }
-    if (error) {
-      toast.error(error.message);
-    }
-  }, [data]);
 
   const defaultAccordionValue = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
@@ -60,7 +55,11 @@ const Sidebar = ({ storageKey = 't-sidebar-state' }: SidebarProps) => {
           <ContactRound className='w-6 h-6 mr-1' />
           <span className='text-2xl font-medium '>Clients</span>
         </div>
-        <FormClientPopover side='right' align='center' sideOffset={10}>
+        <FormClientPopover
+          side={popoverSide}
+          sideOffset={popoverSideOffset}
+          align={popoverAlign}
+        >
           <Button
             size={'icon'}
             variant={'ghost'}
@@ -85,7 +84,7 @@ const Sidebar = ({ storageKey = 't-sidebar-state' }: SidebarProps) => {
           <NavItem.Skeleton />
           <NavItem.Skeleton />
         </div>
-      ) : !clients.length ? (
+      ) : !clients ? (
         <div className='flex flex-col items-center gap-y-5 mt-3'>
           <Image
             src={'/images/noClients.png'}

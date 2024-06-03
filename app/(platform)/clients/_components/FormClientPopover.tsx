@@ -27,9 +27,9 @@ interface FormPopoverProps {
 
 const FormClientPopover = ({
   children,
-  side = 'bottom',
-  align,
-  sideOffset = 0,
+  side = 'right',
+  align = 'center',
+  sideOffset = 10,
 }: FormPopoverProps) => {
   const closeRef = useRef<ElementRef<'button'>>(null);
   const router = useRouter();
@@ -61,7 +61,7 @@ const FormClientPopover = ({
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent
         align={align}
-        className='w-[400px] pt-3 h-[500px] overflow-auto'
+        className='pt-3 overflow-auto'
         side={side}
         sideOffset={sideOffset}
       >
@@ -81,7 +81,7 @@ const FormClientPopover = ({
           </div>
         </div>
         <form action={onSubmit} className='space-y-4 mt-8'>
-          <div className='space-y-3'>
+          <div>
             <FormPicker id='image' errors={fieldErrors} />
             <FormInput
               id='name'
@@ -108,7 +108,7 @@ const FormClientPopover = ({
               errors={fieldErrors}
             />
           </div>
-          <FormButton className='w-full'>Add client</FormButton>
+          <FormButton className='w-full'>Add</FormButton>
         </form>
       </PopoverContent>
     </Popover>
