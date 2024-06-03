@@ -4,7 +4,7 @@ import Link from 'next/link';
 
 export const Navbar = () => {
   return (
-    <div className='flex items-center bg-white/80 fixed w-full h-20 px-4 top-0 border-b shadow-sm '>
+    <nav className='flex items-center bg-white/80 fixed w-full h-14 px-4 top-0 border-b shadow-sm '>
       <div className='md:max-w-screen-2xl mx-auto w-full flex items-center justify-between'>
         <Logo />
         <div className='space-x-4 md:block md:w-auto flex items-center justify-between w-full'>
@@ -16,6 +16,6 @@ export const Navbar = () => {
           </Button>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };

@@ -5,10 +5,21 @@ const isProtectedRoute = createRouteMatcher([
   '/clients(.*)',
   '/shifts(.*)',
   '/employees(.*)',
+  '/select-org(.*)',
 ]);
 
-export default clerkMiddleware((auth, request) => {
-  if (isProtectedRoute(request)) {
+export default clerkMiddleware((auth, req) => {
+  const { userId, orgId } = auth();
+  if (req.nextUrl.pathname.startsWith('/api')) {
+    return NextResponse.next();
+  }
+  if (userId && orgId && !isProtectedRoute(req)) {
+    return NextResponse.redirect(new URL('/clients', req.url));
+  }
+  if (userId && !orgId && req.nextUrl.pathname !== '/select-org') {
+    return NextResponse.redirect(new URL('/select-org', req.url));
+  }
+  if (isProtectedRoute(req)) {
     auth().protect();
   }
   return NextResponse.next();

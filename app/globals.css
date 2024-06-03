@@ -9,6 +9,18 @@ body,
   margin: 0;
 }
 
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar:horizontal {
+  height: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-300 rounded-xl;
+}
+
 
   @layer base {
     :root {
