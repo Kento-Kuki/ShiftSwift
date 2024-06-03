@@ -9,7 +9,7 @@ import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
 import { Client } from '@/types';
-import { Info, Settings, Store } from 'lucide-react';
+import { Activity, Settings, Store } from 'lucide-react';
 import Image from 'next/image';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
@@ -31,9 +31,9 @@ const NavItem = ({ onExpand, client, isExpanded }: NavItemProps) => {
       href: `/clients/${client.id}/sites`,
     },
     {
-      label: 'Info',
-      icon: <Info className='w-4 h-4 mr-2' />,
-      href: `/clients/${client.id}/info`,
+      label: 'Activity',
+      icon: <Activity className='w-4 h-4 mr-2' />,
+      href: `/clients/${client.id}/activity`,
     },
     {
       label: 'Settings',

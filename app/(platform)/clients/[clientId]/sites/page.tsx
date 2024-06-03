@@ -1,7 +1,14 @@
 import React from 'react';
+import Info from './_components/Info';
+import { Separator } from '@/components/ui/separator';
 
-const page = () => {
-  return <div>sites</div>;
+const SitesPage = () => {
+  return (
+    <div className='w-full'>
+      <Info />
+      <Separator className='w-full mt-2' />
+    </div>
+  );
 };
 
-export default page;
+export default SitesPage;
