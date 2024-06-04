@@ -80,34 +80,27 @@ const FormClientPopover = ({
             </PopoverClose>
           </div>
         </div>
-        <form action={onSubmit} className='space-y-4 mt-8'>
-          <div>
-            <FormPicker id='image' errors={fieldErrors} />
-            <FormInput
-              id='name'
-              label='Name'
-              type='text'
-              errors={fieldErrors}
-            />
-            <FormInput
-              id='address'
-              label='Address'
-              type='text'
-              errors={fieldErrors}
-            />
-            <FormInput
-              id='phone'
-              label='Phone'
-              type='phone'
-              errors={fieldErrors}
-            />
-            <FormInput
-              id='email'
-              label='Email'
-              type='email'
-              errors={fieldErrors}
-            />
-          </div>
+        <form action={onSubmit} className='space-y-3 mt-8'>
+          <FormPicker id='image' errors={fieldErrors} />
+          <FormInput id='name' label='Name' type='text' errors={fieldErrors} />
+          <FormInput
+            id='address'
+            label='Address'
+            type='text'
+            errors={fieldErrors}
+          />
+          <FormInput
+            id='phone'
+            label='Phone'
+            type='phone'
+            errors={fieldErrors}
+          />
+          <FormInput
+            id='email'
+            label='Email'
+            type='email'
+            errors={fieldErrors}
+          />
           <FormButton className='w-full'>Add</FormButton>
         </form>
       </PopoverContent>

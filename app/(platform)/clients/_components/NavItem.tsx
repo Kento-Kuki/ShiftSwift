@@ -57,7 +57,7 @@ const NavItem = ({ onExpand, client, isExpanded }: NavItemProps) => {
         <div className='flex items-center gap-x-2'>
           <div className='w-7 h-7 relative'>
             <Image
-              src={client.imageThumbUrl}
+              src={client.imageUrl}
               alt={client.name}
               fill
               className='object-cover rounded-sm'

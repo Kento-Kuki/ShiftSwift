@@ -5,7 +5,8 @@ import { InputType, ReturnType } from './types';
 import { db } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { createSafeAction } from '@/lib/createSafeAction';
-import { CreateClientSchema } from './schema';
+import { UpdateClientSchema } from './schema';
+import { v4 as uuidv4 } from 'uuid';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
@@ -14,39 +15,32 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       error: 'Unauthorized',
     };
   }
-
-  const { name, address, email, phone, image } = data;
-
-  const [imageId, imageUrl, imageLinkHTML, imageUserName] = image.split('|');
-
-  if (!imageId || !imageUrl || !imageLinkHTML || !imageUserName) {
-    return {
-      error: 'Missing fields. Failed to create client',
-    };
-  }
+  const { name, address, email, phone, image, id } = data;
   let client;
   try {
-    client = await db.client.create({
+    client = await db.client.update({
+      where: {
+        id,
+        orgId,
+      },
       data: {
         name,
         orgId,
         address,
         email,
         phone,
-        imageId,
-        imageUrl,
-        imageLinkHTML,
-        imageUserName,
+        imageId: uuidv4(),
+        imageUrl: image,
       },
     });
   } catch (error) {
     return {
-      error: 'Failed to create client',
+      error: 'Failed to update client',
     };
   }
 
-  revalidatePath(`/clients/${client.id}/sites`);
+  revalidatePath(`/clients/${client.id}/settings`);
   return { data: client };
 };
 
-export const createClient = createSafeAction(CreateClientSchema, handler);
+export const updateClient = createSafeAction(UpdateClientSchema, handler);

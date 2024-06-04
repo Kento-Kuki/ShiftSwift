@@ -26,7 +26,7 @@ const Info = () => {
         <Image
           fill
           sizes='(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw'
-          src={client?.imageThumbUrl!}
+          src={client?.imageUrl!}
           alt='Client Icon'
           className='rounded-md object-cover'
         />

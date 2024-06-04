@@ -4,9 +4,9 @@ import { Separator } from '@/components/ui/separator';
 
 const SitesPage = () => {
   return (
-    <div className='w-full'>
+    <div className='w-full mb-20'>
       <Info />
-      <Separator className='w-full mt-2' />
+      <Separator className='w-full my-2' />
     </div>
   );
 };

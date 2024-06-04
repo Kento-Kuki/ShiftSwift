@@ -8,10 +8,9 @@ export interface Client {
   phone: string;
   email: string;
   imageId: string;
-  imageThumbUrl: string;
-  imageFullUrl: string;
-  imageUserName: string;
-  imageLinkHTML: string;
+  imageUrl: string;
+  imageUserName?: string;
+  imageLinkHTML?: string;
   createdAt: Date;
   updatedAt: Date;
 }
