@@ -3,13 +3,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ContactRound, Plus } from 'lucide-react';
 import FormClientPopover from './FormClientPopover';
-import { Client } from '@/types';
+
 import { Accordion } from '@/components/ui/accordion';
 import NavItem from './NavItem';
 import { useLocalStorage } from 'usehooks-ts';
 import { useQuery } from '@tanstack/react-query';
 import { fetcher } from '@/lib/fetcher';
-import Image from 'next/image';
+import { Client } from '@prisma/client';
+import { useOrganization } from '@clerk/nextjs';
 
 interface SidebarProps {
   storageKey?: string;
@@ -28,8 +29,9 @@ const Sidebar = ({
     storageKey,
     {}
   );
+  const { organization } = useOrganization();
   const { data: clients, isLoading } = useQuery<Client[]>({
-    queryKey: ['clients'],
+    queryKey: ['clients', organization?.id],
     queryFn: () => fetcher('/api/clients'),
   });
 
@@ -46,7 +48,6 @@ const Sidebar = ({
   const onExpand = (id: string) => {
     setExpanded((curr) => ({ ...curr, [id]: !expanded[id] }));
   };
-
   return (
     <div className='flex flex-col gap-y-2'>
       {/* SidebarHeader */}
@@ -84,15 +85,10 @@ const Sidebar = ({
           <NavItem.Skeleton />
           <NavItem.Skeleton />
         </div>
-      ) : !clients ? (
-        <div className='flex flex-col items-center gap-y-5 mt-3'>
-          <Image
-            src={'/images/noClients.png'}
-            width={150}
-            height={150}
-            alt={'Not found'}
-          />
-          <p>You don't have any clients.</p>
+      ) : clients?.length === 0 ? (
+        <div className='flex flex-col items-center mt-3'>
+          <p className='text-lg'>You don't have any clients.</p>
+          <p>Let's add a new one!</p>
         </div>
       ) : (
         <Accordion
@@ -100,7 +96,7 @@ const Sidebar = ({
           defaultValue={defaultAccordionValue}
           className='space-y-2'
         >
-          {clients.map((client: Client) => (
+          {clients?.map((client: Client) => (
             <NavItem
               key={client.id}
               onExpand={onExpand}

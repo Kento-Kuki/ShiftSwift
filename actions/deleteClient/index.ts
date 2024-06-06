@@ -6,7 +6,6 @@ import { db } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { createSafeAction } from '@/lib/createSafeAction';
 import { DeleteClientSchema } from './schema';
-import { redirect } from 'next/navigation';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
@@ -28,7 +27,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     });
   } catch (error) {
     return {
-      error: 'Failed to delete board',
+      error: 'Failed to delete client',
     };
   }
   revalidatePath(`/clients`);

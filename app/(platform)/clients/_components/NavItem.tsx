@@ -8,7 +8,8 @@ import {
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
-import { Client } from '@/types';
+import { Client } from '@prisma/client';
+
 import { Activity, Settings, Store } from 'lucide-react';
 import Image from 'next/image';
 import { useParams, usePathname, useRouter } from 'next/navigation';

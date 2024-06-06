@@ -2,7 +2,7 @@
 
 import { unsplash } from '@/lib/unsplash';
 import { cn } from '@/lib/utils';
-import { Check, Loader2 } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
@@ -87,7 +87,7 @@ const FormPicker = ({ id, errors }: FormPickerProps) => {
               className='hidden'
               checked={selectedImageId === image.id}
               disabled={pending}
-              value={`${image.id}|${image.urls.thumb}|${image.links.html}|${image.user.name}`}
+              value={image.urls.thumb}
               readOnly
             />
             <Image

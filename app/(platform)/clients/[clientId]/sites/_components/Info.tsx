@@ -1,16 +1,19 @@
 'use client';
 import { Skeleton } from '@/components/ui/skeleton';
-import { Client } from '@/types';
+import { useOrganization } from '@clerk/nextjs';
+import { Client } from '@prisma/client';
+
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
 
 const Info = () => {
+  const { organization } = useOrganization();
   const params = useParams();
   const queryClient = useQueryClient();
   const { data: clients, isLoading } = useQuery<Client[]>({
-    queryKey: ['clients'],
+    queryKey: ['clients', organization?.id],
     initialData: () => queryClient.getQueryData<Client[]>(['clients']),
   });
   const client = useMemo(() => {

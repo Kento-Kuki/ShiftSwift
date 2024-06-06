@@ -29,7 +29,7 @@ export const UpdateClientSchema = z.object({
       message: 'Please enter the phone number without hyphens',
     }),
 
-  image: z.string({
+  imageUrl: z.string({
     required_error: 'Image is required',
     invalid_type_error: 'Image must be a string',
   }),

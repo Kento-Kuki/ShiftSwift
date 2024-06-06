@@ -53,8 +53,8 @@ const FormClientPopover = ({
     const address = formData.get('address') as string;
     const phone = formData.get('phone') as string;
     const email = formData.get('email') as string;
-    const image = formData.get('image') as string;
-    execute({ name, address, phone, email, image });
+    const imageUrl = formData.get('image') as string;
+    execute({ name, address, phone, email, imageUrl });
   };
   return (
     <Popover>
@@ -67,9 +67,9 @@ const FormClientPopover = ({
       >
         <div className='fixed top-0 left-0 right-0 h-10 bg-white/95 z-10 flex items-center py-2'>
           <div className=' h-full relative w-full flex items-center justify-center'>
-            <p className='text-sm font-bold  text-neutral-600'>
+            <h2 className='text-lg font-bold  text-neutral-700'>
               Add new client
-            </p>
+            </h2>
             <PopoverClose ref={closeRef} asChild>
               <Button
                 className='h-auto w-auto p-1 absolute right-2 top-0 text-neutral-600'
