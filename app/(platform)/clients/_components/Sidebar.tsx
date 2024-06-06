@@ -87,8 +87,8 @@ const Sidebar = ({
         </div>
       ) : clients?.length === 0 ? (
         <div className='flex flex-col items-center mt-3'>
-          <p className='text-lg'>You don't have any clients.</p>
-          <p>Let's add a new one!</p>
+          <p className='text-lg'>You don&apos;t have any clients.</p>
+          <p>Let&apos;s add a new one!</p>
         </div>
       ) : (
         <Accordion
