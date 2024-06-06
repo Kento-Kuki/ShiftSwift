@@ -54,7 +54,7 @@ const Sidebar = ({
       <div className='flex items-center mb-1 justify-between'>
         <div className='flex justify-between items-center'>
           <ContactRound className='w-6 h-6 mr-1' />
-          <span className='text-2xl font-medium '>Clients</span>
+          <span className='text-2xl font-medium'>Clients</span>
         </div>
         <FormClientPopover
           side={popoverSide}
