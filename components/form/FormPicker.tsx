@@ -2,7 +2,7 @@
 
 import { unsplash } from '@/lib/unsplash';
 import { cn } from '@/lib/utils';
-import { Check, Loader2 } from 'lucide-react';
+import { Check } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { useFormStatus } from 'react-dom';
@@ -10,6 +10,7 @@ import { useFormStatus } from 'react-dom';
 import Link from 'next/link';
 import FormErrors from './FormErrors';
 import { defaultImages } from '@/constants/images';
+import { Skeleton } from '../ui/skeleton';
 
 interface FormPickerProps {
   id: string;
@@ -50,8 +51,16 @@ const FormPicker = ({ id, errors }: FormPickerProps) => {
 
   if (isLoading) {
     return (
-      <div className='p-6 flex items-center justify-center'>
-        <Loader2 className='w-6 h-6 text-sky-700 animate-spin' />
+      <div className='grid grid-cols-3 gap-2 mb-2'>
+        <Skeleton className='aspect-video w-20' />
+        <Skeleton className='aspect-video w-20' />
+        <Skeleton className='aspect-video w-20' />
+        <Skeleton className='aspect-video w-20' />
+        <Skeleton className='aspect-video w-20' />
+        <Skeleton className='aspect-video w-20' />
+        <Skeleton className='aspect-video w-20' />
+        <Skeleton className='aspect-video w-20' />
+        <Skeleton className='aspect-video w-20' />
       </div>
     );
   }
@@ -78,7 +87,7 @@ const FormPicker = ({ id, errors }: FormPickerProps) => {
               className='hidden'
               checked={selectedImageId === image.id}
               disabled={pending}
-              value={`${image.id}|${image.urls.thumb}|${image.urls.full}|${image.links.html}|${image.user.name}`}
+              value={image.urls.thumb}
               readOnly
             />
             <Image

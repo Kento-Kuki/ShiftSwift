@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const CreateClientSchema = z.object({
+export const UpdateClientSchema = z.object({
   name: z
     .string({
       required_error: 'Name is required',
@@ -33,4 +33,6 @@ export const CreateClientSchema = z.object({
     required_error: 'Image is required',
     invalid_type_error: 'Image must be a string',
   }),
+
+  id: z.string(),
 });

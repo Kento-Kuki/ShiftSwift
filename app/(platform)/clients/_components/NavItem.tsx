@@ -1,5 +1,4 @@
 'use client';
-
 import {
   AccordionContent,
   AccordionItem,
@@ -8,8 +7,9 @@ import {
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
 import { cn } from '@/lib/utils';
-import { Client } from '@/types';
-import { Info, Settings, Store } from 'lucide-react';
+import { Client } from '@prisma/client';
+
+import { Activity, Settings, Store } from 'lucide-react';
 import Image from 'next/image';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
@@ -31,9 +31,9 @@ const NavItem = ({ onExpand, client, isExpanded }: NavItemProps) => {
       href: `/clients/${client.id}/sites`,
     },
     {
-      label: 'Info',
-      icon: <Info className='w-4 h-4 mr-2' />,
-      href: `/clients/${client.id}/info`,
+      label: 'Activity',
+      icon: <Activity className='w-4 h-4 mr-2' />,
+      href: `/clients/${client.id}/activity`,
     },
     {
       label: 'Settings',
@@ -41,6 +41,9 @@ const NavItem = ({ onExpand, client, isExpanded }: NavItemProps) => {
       href: `/clients/${client.id}/settings`,
     },
   ];
+  const isActive = (href: string) => {
+    return pathname.includes(href);
+  };
 
   const onClick = (href: string) => {
     router.push(href);
@@ -57,7 +60,7 @@ const NavItem = ({ onExpand, client, isExpanded }: NavItemProps) => {
         <div className='flex items-center gap-x-2'>
           <div className='w-7 h-7 relative'>
             <Image
-              src={client.imageThumbUrl}
+              src={client.imageUrl}
               alt={client.name}
               fill
               className='object-cover rounded-sm'
@@ -74,7 +77,7 @@ const NavItem = ({ onExpand, client, isExpanded }: NavItemProps) => {
             onClick={() => onClick(route.href)}
             className={cn(
               'w-full font-normal justify-start pl-10 mb-1',
-              pathname === route.href && 'bg-sky-500/10 text-sky-700'
+              isActive(route.href) && 'bg-sky-500/10 text-sky-700'
             )}
             variant={'ghost'}
           >

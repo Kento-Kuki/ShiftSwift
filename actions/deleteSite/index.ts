@@ -5,7 +5,7 @@ import { InputType, ReturnType } from './types';
 import { db } from '@/lib/db';
 import { revalidatePath } from 'next/cache';
 import { createSafeAction } from '@/lib/createSafeAction';
-import { CreateClientSchema } from './schema';
+import { DeleteSiteSchema } from './schema';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth();
@@ -15,28 +15,23 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  const { name, address, email, phone, imageUrl } = data;
+  const { id, clientId } = data;
 
-  let client;
+  let site;
   try {
-    client = await db.client.create({
-      data: {
-        name,
-        orgId,
-        address,
-        email,
-        phone,
-        imageUrl,
+    site = await db.site.delete({
+      where: {
+        id,
+        clientId,
       },
     });
   } catch (error) {
     return {
-      error: 'Failed to create client',
+      error: 'Failed to delete site',
     };
   }
-
-  revalidatePath(`/clients/${client.id}/sites`);
-  return { data: client };
+  revalidatePath(`/clients/${site.clientId}/sites`);
+  return { data: site };
 };
 
-export const createClient = createSafeAction(CreateClientSchema, handler);
+export const deleteSite = createSafeAction(DeleteSiteSchema, handler);
