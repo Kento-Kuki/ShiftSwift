@@ -1,5 +1,4 @@
 'use client';
-
 import {
   AccordionContent,
   AccordionItem,
@@ -42,6 +41,9 @@ const NavItem = ({ onExpand, client, isExpanded }: NavItemProps) => {
       href: `/clients/${client.id}/settings`,
     },
   ];
+  const isActive = (href: string) => {
+    return pathname.includes(href);
+  };
 
   const onClick = (href: string) => {
     router.push(href);
@@ -75,7 +77,7 @@ const NavItem = ({ onExpand, client, isExpanded }: NavItemProps) => {
             onClick={() => onClick(route.href)}
             className={cn(
               'w-full font-normal justify-start pl-10 mb-1',
-              pathname === route.href && 'bg-sky-500/10 text-sky-700'
+              isActive(route.href) && 'bg-sky-500/10 text-sky-700'
             )}
             variant={'ghost'}
           >

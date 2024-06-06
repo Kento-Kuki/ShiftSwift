@@ -9,6 +9,7 @@ import { Site } from '@prisma/client';
 
 import SiteEditModal from './SiteEditModal';
 import SiteAlertDialog from './SiteAlertDialog';
+import Link from 'next/link';
 
 interface SiteCardProps {
   site: Site;
@@ -63,7 +64,9 @@ export const SiteCard = ({ site }: SiteCardProps) => {
       </CardContent>
       <CardFooter className='flex justify-between gap-x-4 pb-4 items-center'>
         <Button size={'sm'} variant={'primary'}>
-          Shifts
+          <Link href={`/clients/${site.clientId}/sites/${site.id}`}>
+            Shifts
+          </Link>
         </Button>
         <div className='flex gap-x-2'>
           <SiteEditModal site={site}>

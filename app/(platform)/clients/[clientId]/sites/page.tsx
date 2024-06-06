@@ -1,4 +1,3 @@
-import React from 'react';
 import Info from './_components/Info';
 import { Separator } from '@/components/ui/separator';
 import FormSitePopover from './_components/FormSitePopover';
