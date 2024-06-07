@@ -54,7 +54,7 @@ const Sidebar = ({
       <div className='flex items-center mb-1 justify-between'>
         <div className='flex justify-between items-center'>
           <ContactRound className='w-6 h-6 mr-1' />
-          <span className='text-2xl font-medium '>Clients</span>
+          <span className='text-2xl font-medium'>Clients</span>
         </div>
         <FormClientPopover
           side={popoverSide}
@@ -87,8 +87,8 @@ const Sidebar = ({
         </div>
       ) : clients?.length === 0 ? (
         <div className='flex flex-col items-center mt-3'>
-          <p className='text-lg'>You don't have any clients.</p>
-          <p>Let's add a new one!</p>
+          <p className='text-lg'>You don&apos;t have any clients.</p>
+          <p>Let&apos;s add a new one!</p>
         </div>
       ) : (
         <Accordion
