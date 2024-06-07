@@ -30,7 +30,7 @@ const SiteEditModal = ({ children, site }: SiteEditModalProps) => {
     return option || { value: req, label: req };
   });
 
-  const { execute: updateExecute, fieldErrors } = useAction(updateSite, {
+  const { execute, fieldErrors } = useAction(updateSite, {
     onSuccess: () => {
       toast.success('Site updated');
       closeRef.current?.click();
@@ -46,14 +46,6 @@ const SiteEditModal = ({ children, site }: SiteEditModalProps) => {
     const requirements = formData.getAll('requirements') as string[];
     const description = formData.get('description') as string;
 
-    console.log({ name, location, requirements, description });
-    console.log({
-      name,
-      location,
-      requirements,
-      description,
-    });
-
     if (
       name === site.name &&
       location === site.location &&
@@ -64,7 +56,7 @@ const SiteEditModal = ({ children, site }: SiteEditModalProps) => {
       return;
     }
 
-    updateExecute({
+    execute({
       name,
       location,
       requirements,

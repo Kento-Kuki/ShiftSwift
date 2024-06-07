@@ -34,7 +34,7 @@ const Info = () => {
           className='rounded-md object-cover'
         />
       </div>
-      <p className='font-semibold text-xl'>{client?.name}</p>
+      <p className='font-semibold text-xl hover:opacity-75'>{client?.name}</p>
     </div>
   );
 };

@@ -10,6 +10,7 @@ import { Site } from '@prisma/client';
 import SiteEditModal from './SiteEditModal';
 import SiteAlertDialog from './SiteAlertDialog';
 import Link from 'next/link';
+import { Badge } from '@/components/ui/badge';
 
 interface SiteCardProps {
   site: Site;
@@ -36,12 +37,9 @@ export const SiteCard = ({ site }: SiteCardProps) => {
             <div className='flex flex-wrap gap-2'>
               {site.requirements.length > 0 ? (
                 site.requirements.map((requirement) => (
-                  <span
-                    className='inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800'
-                    key={requirement}
-                  >
+                  <Badge variant={'secondary'} key={requirement}>
                     {requirement}
-                  </span>
+                  </Badge>
                 ))
               ) : (
                 <span className=' text-xs font-medium text-gray-800 pl-1'>
