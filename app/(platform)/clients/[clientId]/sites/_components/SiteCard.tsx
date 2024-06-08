@@ -73,7 +73,7 @@ export const SiteCard = ({ site }: SiteCardProps) => {
             </Button>
           </SiteEditModal>
           <SiteAlertDialog id={site.id} clientId={site.clientId}>
-            <Button variant={'destructive'} size='sm'>
+            <Button variant={'delete'} size='sm'>
               Delete
             </Button>
           </SiteAlertDialog>

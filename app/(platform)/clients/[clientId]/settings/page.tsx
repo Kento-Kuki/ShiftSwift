@@ -52,7 +52,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import Image from 'next/image';
-import { Upload } from 'lucide-react';
+import { OctagonAlert, Upload } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 
@@ -248,16 +248,19 @@ const SettingsPage = () => {
           </form>
           <Separator className='my-5' />
         </CardContent>
-        <CardFooter className='px-0 md:flex block md:px-6 justify-between'>
-          <div className='mb-3 md:mb-0'>
-            <h3 className='text-lg font-semibold'>Delete Client</h3>
-            <p className='text-sm text-gray-500 dark:text-gray-400'>
-              This action cannot be undone.
-            </p>
+        <CardFooter className='p-3 md:flex block md:mx-6 justify-between bg-rose-50 mb-4 rounded-md border border-rose-300'>
+          <div className='mb-3 md:mb-0 flex gap-x-2 items-center'>
+            <OctagonAlert className='w-5 h-5 mr-2 text-red-500' />
+            <div>
+              <h3 className='text-lg font-medium'>Delete Client</h3>
+              <p className='text-sm text-gray-500 dark:text-gray-400'>
+                This action cannot be undone.
+              </p>
+            </div>
           </div>
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button className='w-full md:w-fit' variant='destructive'>
+              <Button className='w-full md:w-fit' variant='delete'>
                 Delete Client
               </Button>
             </AlertDialogTrigger>

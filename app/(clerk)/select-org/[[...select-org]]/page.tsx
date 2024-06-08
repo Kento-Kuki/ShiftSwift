@@ -7,8 +7,8 @@ export default function CreateOrganizationPage() {
       <ClerkLoaded>
         <OrganizationList
           hidePersonal
-          afterSelectOrganizationUrl={'/organization/:id'}
-          afterCreateOrganizationUrl={'/organization/:id'}
+          afterSelectOrganizationUrl={'/register-employee'}
+          afterCreateOrganizationUrl={'/register-employee'}
         />
       </ClerkLoaded>
       <ClerkLoading>
