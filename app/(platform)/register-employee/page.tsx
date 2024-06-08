@@ -26,7 +26,7 @@ const RegisterEmployeePage = async () => {
           Welcome to {orgSlug}!
         </h1>
         <p className='text-sm md:text-lg font-medium'>
-          Let's start by filling out your information.
+          Let&apos;ts start by filling out your information.
         </p>
       </div>
       <RegisterForm />
