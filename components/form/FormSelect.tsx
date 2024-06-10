@@ -74,6 +74,7 @@ export const FormSelect = <
           </Label>
         ) : null}
         <Select
+          instanceId={id}
           id={id}
           placeholder={placeholder}
           isDisabled={isDisabled || pending}

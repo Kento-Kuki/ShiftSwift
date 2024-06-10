@@ -1,6 +1,16 @@
+'use client';
 import Image from 'next/image';
+import { useSearchParams } from 'next/navigation';
+import { useEffect } from 'react';
+import { toast } from 'sonner';
 
 const ClientPage = () => {
+  const searchParams = useSearchParams();
+  const error = searchParams.get('error');
+
+  useEffect(() => {
+    if (error) toast.error(error);
+  }, [error]);
   return (
     <div className='flex justify-center items-center h-full flex-col w-full'>
       <div className='text-center mb-5'>
