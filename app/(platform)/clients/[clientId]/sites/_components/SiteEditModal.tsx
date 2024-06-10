@@ -104,7 +104,7 @@ const SiteEditModal = ({ children, site }: SiteEditModalProps) => {
           />
           <DialogFooter>
             <FormButton>Save</FormButton>
-            <DialogClose ref={closeRef}>
+            <DialogClose ref={closeRef} asChild>
               <Button variant='outline' type='button'>
                 Cancel
               </Button>

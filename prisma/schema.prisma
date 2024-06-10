@@ -24,8 +24,10 @@ model Client {
 
   site Site[]
 
-  createdAt     DateTime @default(now())
-  updatedAt     DateTime @updatedAt
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orgId])
 }
 
 model Site {
@@ -35,10 +37,12 @@ model Site {
   location String
   description String?
   requirements String[]
-  client Client @relation(fields: [clientId],references: [id])
+  client Client @relation(fields: [clientId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+
+  @@index([clientId])
 }
 
 model Employee {
@@ -51,6 +55,44 @@ model Employee {
   imageUrl String
   skills String[]
 
+  shiftAssignments ShiftAssignment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([orgId])
+  @@index([userId])
+}
+
+model Shift {
+  id String @id @default(uuid())
+  siteId String
+  date DateTime
+  startTime DateTime
+  endTime DateTime
+  headcount Int
+
+  shiftAssignments ShiftAssignment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([siteId])
+}
+
+model ShiftAssignment {
+  id String @id @default(uuid())
+  shiftId String
+  employeeId String
+
+  shift Shift @relation(fields: [shiftId], references: [id])
+  employee Employee @relation(fields: [employeeId], references: [id])
+
+  @@unique([shiftId, employeeId])
+  @@index([shiftId])
+  @@index([employeeId])
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
+

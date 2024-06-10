@@ -1,15 +1,8 @@
-import { Button } from '@/components/ui/button';
-import Info from '../_components/Info';
 import { Separator } from '@/components/ui/separator';
-import {
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  BreadcrumbList,
-  BreadcrumbSeparator,
-} from '@/components/ui/breadcrumb';
 import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
+import ShiftCard from './_components/ShiftCard';
+import SiteHeader from './_components/SiteHeader';
 const SiteIdPage = async ({
   params,
 }: {
@@ -22,28 +15,28 @@ const SiteIdPage = async ({
     },
   });
 
+  const shifts = await db.shift.findMany({
+    where: {
+      siteId: params.siteId,
+    },
+    include: {
+      shiftAssignments: true,
+    },
+    orderBy: {
+      date: 'asc',
+    },
+  });
+
   if (!site) notFound();
   return (
     <div className='w-full'>
-      <div className='flex justify-between items-center my-2 mx-1'>
-        <Breadcrumb>
-          <BreadcrumbList className='text-black font-bold text-lg '>
-            <BreadcrumbItem>
-              <BreadcrumbLink href={`/clients/${site.clientId}/sites`}>
-                <Info />
-              </BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbSeparator />
-            <BreadcrumbItem className='hover:opacity-75'>
-              <BreadcrumbLink>{site.name}</BreadcrumbLink>
-            </BreadcrumbItem>
-          </BreadcrumbList>
-        </Breadcrumb>
-        <Button variant={'primary'} size={'sm'}>
-          Add New Site
-        </Button>
-      </div>
+      <SiteHeader site={site} />
       <Separator className='w-full ' />
+      <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 m-2 my-5'>
+        {shifts.map((shift) => (
+          <ShiftCard key={shift.id} shift={shift} clientId={params.clientId} />
+        ))}
+      </div>
     </div>
   );
 };

@@ -19,7 +19,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   let site;
   try {
-    console.log({ name, location, requirements, description, clientId });
     site = await db.site.create({
       data: {
         name,
