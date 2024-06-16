@@ -91,7 +91,10 @@ const SiteEditModal = ({ children, site }: SiteEditModalProps) => {
             label='Requirements'
             placeholder='Add requirements'
             options={skillOptions}
-            defaultValue={selectedOptions}
+            defaultValue={site.requirements.map((req) => ({
+              label: req,
+              value: req,
+            }))}
             isMulti
             errors={fieldErrors}
           />
