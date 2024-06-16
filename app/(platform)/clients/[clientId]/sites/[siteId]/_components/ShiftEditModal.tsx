@@ -1,6 +1,7 @@
 'use client';
 import { updateShift } from '@/actions/updateShift';
 import FormButton from '@/components/form/FormButton';
+import { FormDatePicker } from '@/components/form/FormDatePicker';
 import { FormInput } from '@/components/form/FormInput';
 import { FormSelect } from '@/components/form/FormSelect';
 import { Button } from '@/components/ui/button';
@@ -11,8 +12,10 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { TIME_OPTIONS } from '@/constants/selectOptions';
 import { useAction } from '@/hooks/useAction';
 import { fetcher } from '@/lib/fetcher';
+import { formatDateToTime } from '@/utils/formatDateToTime';
 import { useOrganization } from '@clerk/nextjs';
 import { Employee, Shift } from '@prisma/client';
 import { useQuery } from '@tanstack/react-query';
@@ -56,6 +59,19 @@ const ShiftEditModal = ({
     [assignedEmployees]
   );
 
+  const formattedTimes = useMemo(() => {
+    return {
+      startTime: {
+        label: formatDateToTime(shift.startTime),
+        value: formatDateToTime(shift.startTime),
+      },
+      endTime: {
+        label: formatDateToTime(shift.endTime),
+        value: formatDateToTime(shift.endTime),
+      },
+    };
+  }, [shift, assignedEmployees]);
+
   const { execute, fieldErrors } = useAction(updateShift, {
     onSuccess: () => {
       toast.success('Shift updated');
@@ -88,27 +104,26 @@ const ShiftEditModal = ({
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <form action={onSubmit} className='space-y-3'>
-          <FormInput
-            id='date'
-            label='Date'
-            type='date'
-            defaultValue={shift.date.toISOString().slice(0, 10)}
+          <FormDatePicker
+            id={'date'}
+            label={'Date'}
+            defaultValue={shift.date}
           />
           <div className='flex gap-x-4'>
             <div className='flex-1'>
-              <FormInput
-                id='startTime'
-                label='Start Time'
-                type='time'
-                defaultValue={shift.startTime.toISOString().slice(11, 16)}
+              <FormSelect
+                id={'startTime'}
+                label={'Start Time'}
+                options={TIME_OPTIONS}
+                defaultValue={formattedTimes.startTime}
               />
             </div>
             <div className='flex-1'>
-              <FormInput
-                id='endTime'
-                label='End Time'
-                type='time'
-                defaultValue={shift.endTime.toISOString().slice(11, 16)}
+              <FormSelect
+                id={'endTime'}
+                label={'End Time'}
+                options={TIME_OPTIONS}
+                defaultValue={formattedTimes.endTime}
               />
             </div>
           </div>

@@ -13,7 +13,6 @@ export async function GET() {
         orgId,
       },
     });
-
     return NextResponse.json(employees);
   } catch (error) {
     return new NextResponse('Internal Server Error', { status: 500 });

@@ -86,7 +86,7 @@ model ShiftAssignment {
   employeeId String
 
   shift Shift @relation(fields: [shiftId], references: [id])
-  employee Employee @relation(fields: [employeeId], references: [id])
+  employee Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
 
   @@unique([shiftId, employeeId])
   @@index([shiftId])

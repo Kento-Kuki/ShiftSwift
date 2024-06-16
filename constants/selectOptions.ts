@@ -1,10 +1,10 @@
 export const skillOptions = [
-  { value: 'first aid', label: 'First Aid' },
-  { value: 'security', label: 'Security' },
-  { value: 'customer service', label: 'Customer Service' },
-  { value: 'food handling', label: 'Food Handling' },
-  { value: 'cleaning', label: 'Cleaning' },
-  { value: "driver's license", label: "Driver's License" },
+  { value: 'First Aid', label: 'First Aid' },
+  { value: 'Security', label: 'Security' },
+  { value: 'Customer Service', label: 'Customer Service' },
+  { value: 'Food Handling', label: 'Food Handling' },
+  { value: 'Cleaning', label: 'Cleaning' },
+  { value: "Driver's License", label: "Driver's License" },
 ];
 
 export const TIME_OPTIONS = [

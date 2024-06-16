@@ -22,7 +22,7 @@ interface FormDatePickerProps {
   disabled?: boolean;
   errors?: Record<string, string[] | undefined>;
   className?: string;
-  defaultValue?: string;
+  defaultValue?: Date;
   onBlur?: () => void;
 }
 export function FormDatePicker({
@@ -46,7 +46,7 @@ export function FormDatePicker({
           {label ? (
             <Label
               htmlFor={id}
-              className='text-xs font-semibold text-neutral-700'
+              className='text-xs font-semibold text-neutral-700 block'
             >
               {label}
             </Label>
@@ -61,14 +61,20 @@ export function FormDatePicker({
                 )}
               >
                 <CalendarIcon className='mr-2 h-4 w-4' />
-                {date ? format(date, 'PPP') : <span>Pick a date</span>}
+                {date ? (
+                  format(date, 'PPP')
+                ) : defaultValue ? (
+                  format(defaultValue, 'PPP')
+                ) : (
+                  <span>Pick a date</span>
+                )}
               </Button>
             </PopoverTrigger>
             <PopoverContent className='w-auto p-0' align='start'>
               <Calendar
                 disabled={disabled || pending}
                 mode='single'
-                selected={date}
+                selected={date || defaultValue}
                 onSelect={(date) => {
                   setDate(date);
                   setIsOpen(false);
