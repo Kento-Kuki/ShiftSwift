@@ -21,6 +21,7 @@ interface FormSelectProps<
   options: Option[];
   isMulti?: IsMulti;
   isDisabled?: boolean;
+  isSearchable?: boolean;
   autoFocus?: boolean;
   errors?: Record<string, string[] | undefined>;
   hideSelectedOptions?: boolean;
@@ -40,6 +41,7 @@ export const FormSelect = <
   className,
   isDisabled,
   isMulti,
+  isSearchable = true,
   autoFocus,
   errors,
   hideSelectedOptions = true,
@@ -88,6 +90,7 @@ export const FormSelect = <
           isMulti={isMulti}
           aria-describedby={`${id}-error`}
           hideSelectedOptions={hideSelectedOptions}
+          isSearchable={isSearchable}
         />
       </div>
       <FormErrors id={id} errors={errors} />

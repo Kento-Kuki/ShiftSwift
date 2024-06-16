@@ -6,7 +6,6 @@ import {
   PopoverClose,
 } from '@/components/ui/popover';
 import { toast } from 'sonner';
-import { X } from 'lucide-react';
 import { ElementRef, useMemo, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import FormButton from '@/components/form/FormButton';
@@ -19,6 +18,9 @@ import { useQuery } from '@tanstack/react-query';
 import { Employee } from '@prisma/client';
 import { fetcher } from '@/lib/fetcher';
 import { createShift } from '@/actions/createShift';
+import { FormDatePicker } from '@/components/form/FormDatePicker';
+import { X } from 'lucide-react';
+import { TIME_OPTIONS } from '@/constants/selectOptions';
 
 interface FormPopoverProps {
   children: React.ReactNode;
@@ -64,7 +66,16 @@ const FormShiftPopover = ({
     const endTime = formData.get('endTime') as string;
     const employees = formData.getAll('employees') as string[];
     const headcount = formData.get('headcount') as string;
-    execute({
+    // execute({
+    //   date,
+    //   startTime,
+    //   endTime,
+    //   headcount: parseInt(headcount),
+    //   employees,
+    //   siteId: params.siteId as string,
+    //   clientId: params.clientId as string,
+    // });
+    console.log({
       date,
       startTime,
       endTime,
@@ -99,13 +110,21 @@ const FormShiftPopover = ({
           </div>
         </div>
         <form action={onSubmit} className='space-y-3'>
-          <FormInput id='date' label='Date' type='date' />
+          <FormDatePicker id={'date'} label={'Date'} />
           <div className='flex gap-x-4'>
             <div className='flex-1'>
-              <FormInput id='startTime' label='Start Time' type='time' />
+              <FormSelect
+                id={'startTime'}
+                label={'Start Time'}
+                options={TIME_OPTIONS}
+              />
             </div>
             <div className='flex-1'>
-              <FormInput id='endTime' label='End Time' type='time' />
+              <FormSelect
+                id={'endTime'}
+                label={'End Time'}
+                options={TIME_OPTIONS}
+              />
             </div>
           </div>
           <FormInput

@@ -12,7 +12,7 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { skillOptions } from '@/constants/skills';
+import { skillOptions } from '@/constants/selectOptions';
 import { useAction } from '@/hooks/useAction';
 import { Site } from '@prisma/client';
 import { ElementRef, useRef } from 'react';

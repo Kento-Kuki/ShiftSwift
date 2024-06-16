@@ -16,7 +16,7 @@ import FormButton from '@/components/form/FormButton';
 import FormTextarea from '@/components/form/FormTextarea';
 import { useAction } from '@/hooks/useAction';
 import { FormSelect } from '@/components/form/FormSelect';
-import { skillOptions } from '@/constants/skills';
+import { skillOptions } from '@/constants/selectOptions';
 import { createSite } from '@/actions/createSite';
 
 interface FormPopoverProps {

@@ -4,7 +4,7 @@ import FormButton from '@/components/form/FormButton';
 import { FormInput } from '@/components/form/FormInput';
 import { FormSelect } from '@/components/form/FormSelect';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { skillOptions } from '@/constants/skills';
+import { skillOptions } from '@/constants/selectOptions';
 import { useAction } from '@/hooks/useAction';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
