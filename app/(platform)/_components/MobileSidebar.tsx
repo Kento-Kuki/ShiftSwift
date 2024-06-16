@@ -7,6 +7,7 @@ import { Menu } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import Sidebar from '../clients/_components/Sidebar';
+import Link from 'next/link';
 
 const MobileSidebar = () => {
   const pathname = usePathname();
@@ -37,6 +38,26 @@ const MobileSidebar = () => {
       </Button>
       <Sheet open={isOpen} onOpenChange={onClose}>
         <SheetContent side={'left'} className='p-2 pt-10'>
+          <div className='flex justify-center items-center gap-2 py-4'>
+            <Link
+              href={'/clients'}
+              className='hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
+            >
+              Clients
+            </Link>
+            <Link
+              href={'/assignments'}
+              className='hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
+            >
+              Assignments
+            </Link>
+            <Link
+              href={'/employees'}
+              className='hover:opacity-75 transition text-sm font-base text-gray-600'
+            >
+              Employees
+            </Link>
+          </div>
           <Sidebar
             storageKey='t-sidebar-mobile-state'
             popoverSide='bottom'

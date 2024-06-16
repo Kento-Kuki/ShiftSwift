@@ -19,7 +19,25 @@ const Navbar = () => {
           </Button>
         </div>
 
-        <div className='ml-auto flex items-center gap-x-2 justify-between'>
+        <div className='ml-auto flex items-center gap-x-2 lg:gap-x-4 justify-between'>
+          <Link
+            href={'/clients'}
+            className='hidden md:inline hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
+          >
+            Clients
+          </Link>
+          <Link
+            href={'/assignments'}
+            className='hidden md:inline hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
+          >
+            Assignments
+          </Link>
+          <Link
+            href={'/employees'}
+            className='hidden md:inline hover:opacity-75 transition text-sm font-base text-gray-600'
+          >
+            Employees
+          </Link>
           <OrganizationSwitcher
             hidePersonal
             afterCreateOrganizationUrl={'/register-employee'}
