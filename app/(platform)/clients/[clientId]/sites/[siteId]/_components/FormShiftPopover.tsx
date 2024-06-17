@@ -66,16 +66,7 @@ const FormShiftPopover = ({
     const endTime = formData.get('endTime') as string;
     const employees = formData.getAll('employees') as string[];
     const headcount = formData.get('headcount') as string;
-    // execute({
-    //   date,
-    //   startTime,
-    //   endTime,
-    //   headcount: parseInt(headcount),
-    //   employees,
-    //   siteId: params.siteId as string,
-    //   clientId: params.clientId as string,
-    // });
-    console.log({
+    execute({
       date,
       startTime,
       endTime,

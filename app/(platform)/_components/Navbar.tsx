@@ -4,11 +4,13 @@ import React from 'react';
 import MobileSidebar from './MobileSidebar';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { format } from 'date-fns';
 
 const Navbar = () => {
+  const today = format(new Date(), 'yyyy-MM-dd');
   return (
     <nav className='flex items-center bg-white/80 fixed w-full h-14 px-4 top-0 border-b shadow-sm '>
-      <MobileSidebar />
+      <MobileSidebar today={today} />
       <div className='md:max-w-screen-2xl mx-auto w-full flex items-center justify-between'>
         <div className='flex items-center gap-x-6'>
           <div className='hidden md:block'>
@@ -27,10 +29,10 @@ const Navbar = () => {
             Clients
           </Link>
           <Link
-            href={'/assignments'}
+            href={`/assignment/${today}`}
             className='hidden md:inline hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
           >
-            Assignments
+            Assignment
           </Link>
           <Link
             href={'/employees'}

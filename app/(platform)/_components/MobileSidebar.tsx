@@ -9,7 +9,11 @@ import { useEffect, useState } from 'react';
 import Sidebar from '../clients/_components/Sidebar';
 import Link from 'next/link';
 
-const MobileSidebar = () => {
+interface MobileSidebarProps {
+  today: string;
+}
+
+const MobileSidebar = ({ today }: MobileSidebarProps) => {
   const pathname = usePathname();
   const [isMounted, setIsMounted] = useState(false);
   const onOpen = useMobileSidebar((state) => state.onOpen);
@@ -46,10 +50,10 @@ const MobileSidebar = () => {
               Clients
             </Link>
             <Link
-              href={'/assignments'}
+              href={`/assignment/${today}`}
               className='hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
             >
-              Assignments
+              Assignment
             </Link>
             <Link
               href={'/employees'}

@@ -26,6 +26,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       },
     });
   } catch (error) {
+    console.error(error);
     return {
       error: 'Failed to delete site',
     };

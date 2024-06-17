@@ -35,7 +35,7 @@ export function FormDatePicker({
   defaultValue,
   onBlur,
 }: FormDatePickerProps) {
-  const [date, setDate] = useState<Date>();
+  const [date, setDate] = useState<Date | undefined>(defaultValue);
   const [isOpen, setIsOpen] = useState(false);
   const { pending } = useFormStatus();
 
@@ -74,7 +74,7 @@ export function FormDatePicker({
               <Calendar
                 disabled={disabled || pending}
                 mode='single'
-                selected={date || defaultValue}
+                selected={date}
                 onSelect={(date) => {
                   setDate(date);
                   setIsOpen(false);

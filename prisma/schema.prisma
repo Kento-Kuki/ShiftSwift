@@ -37,7 +37,9 @@ model Site {
   location String
   description String?
   requirements String[]
-  client Client @relation(fields: [clientId], references: [id])
+  client Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  shifts Shift[]
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -73,6 +75,8 @@ model Shift {
   headcount Int
 
   shiftAssignments ShiftAssignment[]
+
+  site Site @relation(fields: [siteId], references: [id], onDelete: Cascade)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

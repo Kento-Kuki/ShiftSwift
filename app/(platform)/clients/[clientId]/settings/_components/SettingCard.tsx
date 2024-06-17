@@ -75,7 +75,6 @@ const SettingCard = ({ client }: SettingCardProps) => {
     const address = formData.get('address') as string;
     const phone = formData.get('phone') as string;
     const email = formData.get('email') as string;
-    // const image = formData.get('image') as string;
     const imageUrl = client?.imageUrl!;
 
     if (
