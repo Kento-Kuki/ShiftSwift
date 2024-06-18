@@ -1,13 +1,9 @@
 'use client';
+import { useState } from 'react';
 import { addDays, format } from 'date-fns';
-import { cn } from '@/lib/utils';
-import { Button } from '@/components/ui/button';
-import { Calendar } from '@/components/ui/calendar';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { CalendarIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation';
+
 import {
   Select,
   SelectContent,
@@ -15,9 +11,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { CalendarIcon } from 'lucide-react';
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
+import { cn } from '@/lib/utils';
+import { Button } from '@/components/ui/button';
+import { Calendar } from '@/components/ui/calendar';
 
 export function DatePicker({ currentDate }: { currentDate: string }) {
   const [date, setDate] = useState<Date>();

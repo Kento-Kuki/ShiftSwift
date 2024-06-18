@@ -1,8 +1,7 @@
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { ShiftWithAssignments } from '@/types';
-import Image from 'next/image';
 import EmployeeItem from './EmployeeItem';
+import { Badge } from '@/components/ui/badge';
+import { ShiftWithAssignments } from '@/types';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 interface ShiftItemProps {
   shift: ShiftWithAssignments;

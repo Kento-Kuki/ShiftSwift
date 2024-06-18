@@ -1,17 +1,17 @@
 'use client';
+import Image from 'next/image';
+import { Client } from '@prisma/client';
+import { Activity, Settings, Store } from 'lucide-react';
+import { useParams, usePathname, useRouter } from 'next/navigation';
+
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Skeleton } from '@/components/ui/skeleton';
-import { cn } from '@/lib/utils';
-import { Client } from '@prisma/client';
-
-import { Activity, Settings, Store } from 'lucide-react';
-import Image from 'next/image';
-import { useParams, usePathname, useRouter } from 'next/navigation';
 
 interface NavItemProps {
   onExpand: (id: string) => void;
