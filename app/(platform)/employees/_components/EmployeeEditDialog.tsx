@@ -1,10 +1,8 @@
 'use client';
+import { toast } from 'sonner';
+import { Employee } from '@prisma/client';
+import { ElementRef, useRef, useState } from 'react';
 
-import { updateEmployee } from '@/actions/updateEmployee';
-import FormButton from '@/components/form/FormButton';
-import { FormInput } from '@/components/form/FormInput';
-import { FormSelect } from '@/components/form/FormSelect';
-import { Button } from '@/components/ui/button';
 import {
   Dialog,
   DialogClose,
@@ -12,11 +10,14 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { skillOptions } from '@/constants/selectOptions';
+import { Option } from '@/types';
 import { useAction } from '@/hooks/useAction';
-import { Employee } from '@prisma/client';
-import { ElementRef, useRef } from 'react';
-import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import FormButton from '@/components/form/FormButton';
+import { FormInput } from '@/components/form/FormInput';
+import { skillOptions } from '@/constants/selectOptions';
+import { FormSelect } from '@/components/form/FormSelect';
+import { updateEmployee } from '@/actions/updateEmployee';
 
 interface EmployeeEditModalProps {
   children: React.ReactNode;
@@ -24,6 +25,13 @@ interface EmployeeEditModalProps {
 }
 
 const EmployeeEditModal = ({ children, employee }: EmployeeEditModalProps) => {
+  const formattedSkills = employee.skills.map((skill) => ({
+    value: skill,
+    label: skill,
+  }));
+  const [skills, setSkills] = useState<Option | Option[] | null>(
+    formattedSkills
+  );
   const closeRef = useRef<ElementRef<'button'>>(null);
   const { execute, fieldErrors } = useAction(updateEmployee, {
     onSuccess: () => {
@@ -75,11 +83,9 @@ const EmployeeEditModal = ({ children, employee }: EmployeeEditModalProps) => {
             id='skills'
             label='Skills'
             options={skillOptions}
+            selectedOption={skills}
+            setSelectedOption={setSkills}
             isMulti
-            defaultValue={employee.skills.map((skill) => ({
-              label: skill,
-              value: skill,
-            }))}
             errors={fieldErrors}
           />
           <DialogFooter>

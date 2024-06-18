@@ -1,23 +1,25 @@
 'use client';
+
+import { toast } from 'sonner';
+import { X } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { ElementRef, useRef, useState } from 'react';
+
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverClose,
 } from '@/components/ui/popover';
-import { toast } from 'sonner';
-import { X } from 'lucide-react';
-import { ElementRef, useRef } from 'react';
-import { useParams } from 'next/navigation';
-
-import { FormInput } from '@/components/form/FormInput';
-import { Button } from '@/components/ui/button';
-import FormButton from '@/components/form/FormButton';
-import FormTextarea from '@/components/form/FormTextarea';
+import { Option } from '@/types';
 import { useAction } from '@/hooks/useAction';
-import { FormSelect } from '@/components/form/FormSelect';
-import { skillOptions } from '@/constants/selectOptions';
+import { Button } from '@/components/ui/button';
 import { createSite } from '@/actions/createSite';
+import FormButton from '@/components/form/FormButton';
+import { FormInput } from '@/components/form/FormInput';
+import { skillOptions } from '@/constants/selectOptions';
+import FormTextarea from '@/components/form/FormTextarea';
+import { FormSelect } from '@/components/form/FormSelect';
 
 interface FormPopoverProps {
   children: React.ReactNode;
@@ -32,6 +34,9 @@ const FormSitePopover = ({
   align = 'center',
   sideOffset = 10,
 }: FormPopoverProps) => {
+  const [requirements, setRequirements] = useState<Option | Option[] | null>(
+    null
+  );
   const params = useParams();
   const closeRef = useRef<ElementRef<'button'>>(null);
 
@@ -102,6 +107,8 @@ const FormSitePopover = ({
             label='Requirements'
             placeholder='Add requirements'
             options={skillOptions}
+            selectedOption={requirements}
+            setSelectedOption={setRequirements}
             isMulti
             errors={fieldErrors}
           />
