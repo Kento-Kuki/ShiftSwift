@@ -39,7 +39,6 @@ const FormSitePopover = ({
   );
   const params = useParams();
   const closeRef = useRef<ElementRef<'button'>>(null);
-
   const { execute, fieldErrors } = useAction(createSite, {
     onSuccess: () => {
       toast.success('Site created successfully');
@@ -75,7 +74,7 @@ const FormSitePopover = ({
         <div className='fixed top-0 left-0 right-0 h-10 bg-white/95 z-10 flex items-center py-2'>
           <div className=' h-full relative w-full flex items-center justify-center'>
             <h2 className='text-lg font-bold  text-neutral-700'>
-              Add new client
+              Add new site
             </h2>
             <PopoverClose ref={closeRef} asChild>
               <Button

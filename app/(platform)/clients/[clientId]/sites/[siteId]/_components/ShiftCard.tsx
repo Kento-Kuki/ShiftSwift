@@ -55,7 +55,7 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
               alt={_employee.employee.name}
               width={30}
               height={30}
-              className='rounded-full'
+              className='w-8 h-8 rounded-full object-cover'
             />
             <p>{_employee.employee.name}</p>
           </div>

@@ -90,7 +90,7 @@ const FormShiftPopover = ({
     });
   };
   return (
-    <Popover>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent
         side={side}

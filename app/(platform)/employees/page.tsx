@@ -18,7 +18,7 @@ const EmployeesPage = async () => {
     },
   });
   return (
-    <main className='container pt-20'>
+    <main className='container py-20'>
       <div className='flex gap-2 justify-between items-center'>
         <h1 className='text-2xl font-bold'>Employees</h1>
         <div>
