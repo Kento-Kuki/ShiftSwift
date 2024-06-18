@@ -1,10 +1,8 @@
 'use client';
-import { updateSite } from '@/actions/updateSite';
-import FormButton from '@/components/form/FormButton';
-import { FormInput } from '@/components/form/FormInput';
-import { FormSelect } from '@/components/form/FormSelect';
-import FormTextarea from '@/components/form/FormTextarea';
-import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+import { Site } from '@prisma/client';
+import { ElementRef, useRef, useState } from 'react';
+
 import {
   Dialog,
   DialogClose,
@@ -12,11 +10,15 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { skillOptions } from '@/constants/selectOptions';
+import { Option } from '@/types';
 import { useAction } from '@/hooks/useAction';
-import { Site } from '@prisma/client';
-import { ElementRef, useRef } from 'react';
-import { toast } from 'sonner';
+import { Button } from '@/components/ui/button';
+import { updateSite } from '@/actions/updateSite';
+import FormButton from '@/components/form/FormButton';
+import { FormInput } from '@/components/form/FormInput';
+import { skillOptions } from '@/constants/selectOptions';
+import { FormSelect } from '@/components/form/FormSelect';
+import FormTextarea from '@/components/form/FormTextarea';
 
 interface SiteEditModalProps {
   children: React.ReactNode;
@@ -24,11 +26,14 @@ interface SiteEditModalProps {
 }
 
 const SiteEditModal = ({ children, site }: SiteEditModalProps) => {
+  const selectedOptions = site.requirements.map((req) => ({
+    value: req,
+    label: req,
+  }));
+  const [requirements, setRequirements] = useState<Option | Option[] | null>(
+    selectedOptions
+  );
   const closeRef = useRef<ElementRef<'button'>>(null);
-  const selectedOptions = site.requirements.map((req) => {
-    const option = skillOptions.find((option) => option.value === req);
-    return option || { value: req, label: req };
-  });
 
   const { execute, fieldErrors } = useAction(updateSite, {
     onSuccess: () => {
@@ -91,10 +96,8 @@ const SiteEditModal = ({ children, site }: SiteEditModalProps) => {
             label='Requirements'
             placeholder='Add requirements'
             options={skillOptions}
-            defaultValue={site.requirements.map((req) => ({
-              label: req,
-              value: req,
-            }))}
+            selectedOption={requirements}
+            setSelectedOption={setRequirements}
             isMulti
             errors={fieldErrors}
           />

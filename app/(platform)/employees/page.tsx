@@ -1,8 +1,8 @@
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { db } from '@/lib/db';
-import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
+import { auth } from '@clerk/nextjs/server';
+
+import { db } from '@/lib/db';
+import { Input } from '@/components/ui/input';
 import EmployeesList from './_components/EmployeesList';
 
 const EmployeesPage = async () => {

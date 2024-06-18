@@ -1,13 +1,12 @@
 'use client';
-import { Skeleton } from '@/components/ui/skeleton';
-import { useOrganization } from '@clerk/nextjs';
-import { Client } from '@prisma/client';
-
-import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Image from 'next/image';
-import { useParams } from 'next/navigation';
 import { useMemo } from 'react';
+import { Client } from '@prisma/client';
+import { useParams } from 'next/navigation';
+import { useOrganization } from '@clerk/nextjs';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 
+import { Skeleton } from '@/components/ui/skeleton';
 const Info = () => {
   const { organization } = useOrganization();
   const params = useParams();

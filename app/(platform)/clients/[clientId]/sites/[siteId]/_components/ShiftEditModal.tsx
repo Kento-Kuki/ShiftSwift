@@ -1,10 +1,9 @@
 'use client';
-import { updateShift } from '@/actions/updateShift';
-import FormButton from '@/components/form/FormButton';
-import { FormDatePicker } from '@/components/form/FormDatePicker';
-import { FormInput } from '@/components/form/FormInput';
-import { FormSelect } from '@/components/form/FormSelect';
-import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+import { useParams } from 'next/navigation';
+import { Employee, Shift } from '@prisma/client';
+import { ElementRef, useMemo, useRef } from 'react';
+
 import {
   Dialog,
   DialogClose,
@@ -12,16 +11,17 @@ import {
   DialogFooter,
   DialogTrigger,
 } from '@/components/ui/dialog';
-import { TIME_OPTIONS } from '@/constants/selectOptions';
 import { useAction } from '@/hooks/useAction';
-import { fetcher } from '@/lib/fetcher';
+import { Button } from '@/components/ui/button';
+import { updateShift } from '@/actions/updateShift';
+import { useShiftForm } from '@/hooks/useShiftForm';
+import FormButton from '@/components/form/FormButton';
+import { FormInput } from '@/components/form/FormInput';
+import { TIME_OPTIONS } from '@/constants/selectOptions';
+import { FormSelect } from '@/components/form/FormSelect';
 import { formatDateToTime } from '@/utils/formatDateToTime';
-import { useOrganization } from '@clerk/nextjs';
-import { Employee, Shift } from '@prisma/client';
-import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
-import { ElementRef, useMemo, useRef } from 'react';
-import { toast } from 'sonner';
+import { FormDatePicker } from '@/components/form/FormDatePicker';
+import { useAvailableEmployees } from '@/hooks/useAvailableEmployees';
 
 interface ShiftEditModalProps {
   children: React.ReactNode;
@@ -34,31 +34,6 @@ const ShiftEditModal = ({
   shift,
   assignedEmployees,
 }: ShiftEditModalProps) => {
-  const params = useParams();
-  const closeRef = useRef<ElementRef<'button'>>(null);
-  const { organization } = useOrganization();
-  const { data: employees, isLoading } = useQuery<Employee[]>({
-    queryKey: ['employees', organization?.id],
-    queryFn: () => fetcher('/api/employees'),
-  });
-
-  const employeesOptions = useMemo(() => {
-    if (!employees) return [];
-    return employees.map((employee) => ({
-      value: employee.id,
-      label: employee.name,
-    }));
-  }, [employees]);
-
-  const assignedEmployeesOptions = useMemo(
-    () =>
-      assignedEmployees.map((employee) => ({
-        value: employee.id,
-        label: employee.name,
-      })),
-    [assignedEmployees]
-  );
-
   const formattedTimes = useMemo(() => {
     return {
       startTime: {
@@ -71,6 +46,45 @@ const ShiftEditModal = ({
       },
     };
   }, [shift, assignedEmployees]);
+  const assignedEmployeesOptions = useMemo(
+    () =>
+      assignedEmployees.map((employee) => ({
+        value: employee.id,
+        label: employee.name,
+      })),
+    [assignedEmployees]
+  );
+  const {
+    date,
+    setDate,
+    startTime,
+    setStartTime,
+    endTime,
+    setEndTime,
+    employee,
+    setEmployee,
+  } = useShiftForm(
+    shift.date,
+    formattedTimes.startTime,
+    formattedTimes.endTime,
+    assignedEmployeesOptions
+  );
+
+  const { clientId, siteId } = useParams() as {
+    clientId: string;
+    siteId: string;
+  };
+  const closeRef = useRef<ElementRef<'button'>>(null);
+  const { availableEmployees, isLoading, isOpen, setIsOpen } =
+    useAvailableEmployees(date, startTime, endTime);
+
+  const availableEmployeesOptions = useMemo(() => {
+    if (!availableEmployees || isLoading) return [];
+    return availableEmployees.map((availableEmployee) => ({
+      value: availableEmployee.id,
+      label: availableEmployee.name,
+    }));
+  }, [availableEmployees, isLoading]);
 
   const { execute, fieldErrors } = useAction(updateShift, {
     onSuccess: () => {
@@ -96,20 +110,22 @@ const ShiftEditModal = ({
       endTime,
       headcount: parseInt(headcount),
       employees,
-      siteId: params.siteId as string,
-      clientId: params.clientId as string,
+      siteId,
+      clientId,
       id: shift.id,
     });
   };
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
       <DialogContent>
         <form action={onSubmit} className='space-y-3'>
           <FormDatePicker
             id={'date'}
             label={'Date'}
-            defaultValue={shift.date}
+            date={date}
+            setDate={setDate}
+            errors={fieldErrors}
           />
           <div className='flex gap-x-4'>
             <div className='flex-1'>
@@ -117,7 +133,9 @@ const ShiftEditModal = ({
                 id={'startTime'}
                 label={'Start Time'}
                 options={TIME_OPTIONS}
-                defaultValue={formattedTimes.startTime}
+                selectedOption={startTime}
+                setSelectedOption={setStartTime}
+                errors={fieldErrors}
               />
             </div>
             <div className='flex-1'>
@@ -125,7 +143,9 @@ const ShiftEditModal = ({
                 id={'endTime'}
                 label={'End Time'}
                 options={TIME_OPTIONS}
-                defaultValue={formattedTimes.endTime}
+                selectedOption={endTime}
+                setSelectedOption={setEndTime}
+                errors={fieldErrors}
               />
             </div>
           </div>
@@ -134,14 +154,18 @@ const ShiftEditModal = ({
             label='Headcount'
             type='number'
             defaultValue={shift.headcount.toString()}
+            errors={fieldErrors}
           />
           <FormSelect
             id='employees'
             label='Employees'
             placeholder='Assign employees here'
-            options={employeesOptions}
+            options={availableEmployeesOptions}
+            selectedOption={employee}
+            setSelectedOption={setEmployee}
             isMulti
-            defaultValue={assignedEmployeesOptions}
+            errors={fieldErrors}
+            isLoading={isLoading}
           />
           <DialogFooter>
             <FormButton>Save</FormButton>

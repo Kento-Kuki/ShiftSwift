@@ -1,8 +1,9 @@
 'use client';
-import { Accordion } from '@/components/ui/accordion';
-import NavItem from './NavItem';
-import { useLocalStorage } from 'usehooks-ts';
 import { Client } from '@prisma/client';
+import { useLocalStorage } from 'usehooks-ts';
+
+import NavItem from './NavItem';
+import { Accordion } from '@/components/ui/accordion';
 
 interface ClientListProps {
   clients: Client[];

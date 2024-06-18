@@ -1,16 +1,20 @@
 'use client';
-import { createEmployee } from '@/actions/createEmployee';
-import FormButton from '@/components/form/FormButton';
-import { FormInput } from '@/components/form/FormInput';
-import { FormSelect } from '@/components/form/FormSelect';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { skillOptions } from '@/constants/selectOptions';
-import { useAction } from '@/hooks/useAction';
+import { toast } from 'sonner';
+import { useState } from 'react';
 import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
-import { toast } from 'sonner';
+
+import { Option } from '@/types';
+import { useAction } from '@/hooks/useAction';
+import FormButton from '@/components/form/FormButton';
+import { FormInput } from '@/components/form/FormInput';
+import { skillOptions } from '@/constants/selectOptions';
+import { FormSelect } from '@/components/form/FormSelect';
+import { createEmployee } from '@/actions/createEmployee';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 const RegisterForm = () => {
+  const [skills, setSkills] = useState<Option | Option[] | null>(null);
   const router = useRouter();
   const { user } = useUser();
   const { execute, fieldErrors } = useAction(createEmployee, {
@@ -66,6 +70,8 @@ const RegisterForm = () => {
             id='skills'
             label='Skills'
             options={skillOptions}
+            selectedOption={skills}
+            setSelectedOption={setSkills}
             isMulti
             errors={fieldErrors}
           />

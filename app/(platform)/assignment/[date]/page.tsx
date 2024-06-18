@@ -1,11 +1,11 @@
-import { db } from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
-import { DatePicker } from './_components/DatePicker';
-import { Button } from '@/components/ui/button';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+import { db } from '@/lib/db';
+import { Button } from '@/components/ui/button';
 import ShiftItem from './_components/ShiftItem';
-import { ShiftWithAssignments } from '@/types';
+import { DatePicker } from './_components/DatePicker';
 
 const AssignmentDatePage = async ({
   params: { date },

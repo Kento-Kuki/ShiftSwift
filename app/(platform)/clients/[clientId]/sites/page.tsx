@@ -1,10 +1,11 @@
+import { notFound } from 'next/navigation';
+
+import { db } from '@/lib/db';
 import Info from './_components/Info';
+import SiteList from './_components/SiteList';
+import { Button } from '@/components/ui/button';
 import { Separator } from '@/components/ui/separator';
 import FormSitePopover from './_components/FormSitePopover';
-import { Button } from '@/components/ui/button';
-import SiteList from './_components/SiteList';
-import { db } from '@/lib/db';
-import { notFound } from 'next/navigation';
 
 const SitesPage = async ({ params }: { params: { clientId: string } }) => {
   const client = await db.client.findUnique({

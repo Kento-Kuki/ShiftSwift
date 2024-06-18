@@ -1,16 +1,16 @@
 'use client';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ContactRound, Plus } from 'lucide-react';
-import FormClientPopover from './FormClientPopover';
-
-import { Accordion } from '@/components/ui/accordion';
-import NavItem from './NavItem';
-import { useLocalStorage } from 'usehooks-ts';
-import { useQuery } from '@tanstack/react-query';
-import { fetcher } from '@/lib/fetcher';
 import { Client } from '@prisma/client';
+import { useLocalStorage } from 'usehooks-ts';
 import { useOrganization } from '@clerk/nextjs';
+import { useQuery } from '@tanstack/react-query';
+import { ContactRound, Plus } from 'lucide-react';
+
+import NavItem from './NavItem';
+import { fetcher } from '@/lib/fetcher';
+import { Input } from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
+import FormClientPopover from './FormClientPopover';
+import { Accordion } from '@/components/ui/accordion';
 
 interface SidebarProps {
   storageKey?: string;
