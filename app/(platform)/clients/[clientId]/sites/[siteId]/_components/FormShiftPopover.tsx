@@ -1,26 +1,26 @@
 'use client';
+
+import { toast } from 'sonner';
+import { X } from 'lucide-react';
+import { useParams } from 'next/navigation';
+import { ElementRef, useMemo, useRef } from 'react';
+
 import {
   Popover,
   PopoverTrigger,
   PopoverContent,
   PopoverClose,
 } from '@/components/ui/popover';
-import { toast } from 'sonner';
-import { ElementRef, useMemo, useRef } from 'react';
-import { useParams } from 'next/navigation';
-import FormButton from '@/components/form/FormButton';
 import { useAction } from '@/hooks/useAction';
-import { FormSelect } from '@/components/form/FormSelect';
 import { Button } from '@/components/ui/button';
-import { FormInput } from '@/components/form/FormInput';
-import { useOrganization } from '@clerk/nextjs';
-import { useQuery } from '@tanstack/react-query';
-import { Employee } from '@prisma/client';
-import { fetcher } from '@/lib/fetcher';
 import { createShift } from '@/actions/createShift';
-import { FormDatePicker } from '@/components/form/FormDatePicker';
-import { X } from 'lucide-react';
+import { useShiftForm } from '@/hooks/useShiftForm';
+import FormButton from '@/components/form/FormButton';
+import { FormInput } from '@/components/form/FormInput';
 import { TIME_OPTIONS } from '@/constants/selectOptions';
+import { FormSelect } from '@/components/form/FormSelect';
+import { FormDatePicker } from '@/components/form/FormDatePicker';
+import { useAvailableEmployees } from '@/hooks/useAvailableEmployees';
 
 interface FormPopoverProps {
   children: React.ReactNode;
@@ -35,21 +35,34 @@ const FormShiftPopover = ({
   align = 'center',
   sideOffset = 10,
 }: FormPopoverProps) => {
-  const params = useParams();
+  const { clientId, siteId } = useParams() as {
+    clientId: string;
+    siteId: string;
+  };
+  const {
+    date,
+    setDate,
+    startTime,
+    setStartTime,
+    endTime,
+    setEndTime,
+    employee,
+    setEmployee,
+  } = useShiftForm();
   const closeRef = useRef<ElementRef<'button'>>(null);
-  const { organization } = useOrganization();
-  const { data: employees, isLoading } = useQuery<Employee[]>({
-    queryKey: ['employees', organization?.id],
-    queryFn: () => fetcher('/api/employees'),
-  });
-  const employeesOptions = useMemo(() => {
-    if (!employees) return [];
-    return employees.map((employee) => ({
-      value: employee.id,
-      label: employee.name,
-    }));
-  }, [employees]);
 
+  const { availableEmployees, isLoading, isOpen, setIsOpen } =
+    useAvailableEmployees(date, startTime, endTime);
+
+  const availableEmployeesOptions = useMemo(() => {
+    if (!availableEmployees || isLoading) return [];
+    return availableEmployees.map((availableEmployee) => ({
+      value: availableEmployee.id,
+      label: availableEmployee.name,
+    }));
+  }, [availableEmployees, isLoading]);
+
+  // Server Action
   const { execute, fieldErrors } = useAction(createShift, {
     onSuccess: () => {
       toast.success('Shift created successfully');
@@ -72,12 +85,12 @@ const FormShiftPopover = ({
       endTime,
       headcount: parseInt(headcount),
       employees,
-      siteId: params.siteId as string,
-      clientId: params.clientId as string,
+      siteId,
+      clientId,
     });
   };
   return (
-    <Popover>
+    <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
       <PopoverContent
         side={side}
@@ -101,13 +114,22 @@ const FormShiftPopover = ({
           </div>
         </div>
         <form action={onSubmit} className='space-y-3'>
-          <FormDatePicker id={'date'} label={'Date'} />
+          <FormDatePicker
+            id={'date'}
+            label={'Date'}
+            date={date}
+            setDate={setDate}
+            errors={fieldErrors}
+          />
           <div className='flex gap-x-4'>
             <div className='flex-1'>
               <FormSelect
                 id={'startTime'}
                 label={'Start Time'}
                 options={TIME_OPTIONS}
+                selectedOption={startTime}
+                setSelectedOption={setStartTime}
+                errors={fieldErrors}
               />
             </div>
             <div className='flex-1'>
@@ -115,6 +137,9 @@ const FormShiftPopover = ({
                 id={'endTime'}
                 label={'End Time'}
                 options={TIME_OPTIONS}
+                selectedOption={endTime}
+                setSelectedOption={setEndTime}
+                errors={fieldErrors}
               />
             </div>
           </div>
@@ -123,13 +148,18 @@ const FormShiftPopover = ({
             label='Headcount'
             type='number'
             defaultValue='1'
+            errors={fieldErrors}
           />
           <FormSelect
             id='employees'
             label='Employees'
             placeholder='Assign employees here'
-            options={employeesOptions}
+            options={availableEmployeesOptions}
+            selectedOption={employee}
+            setSelectedOption={setEmployee}
             isMulti
+            errors={fieldErrors}
+            isLoading={isLoading}
           />
           <FormButton className='w-full'>Add</FormButton>
         </form>

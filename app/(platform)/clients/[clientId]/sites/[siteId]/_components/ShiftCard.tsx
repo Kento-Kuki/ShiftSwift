@@ -1,4 +1,6 @@
-import { Button } from '@/components/ui/button';
+import Image from 'next/image';
+import { Shift } from '@prisma/client';
+
 import {
   Card,
   CardContent,
@@ -6,9 +8,8 @@ import {
   CardHeader,
 } from '@/components/ui/card';
 import { db } from '@/lib/db';
-import { Shift } from '@prisma/client';
-import Image from 'next/image';
 import ShiftEditModal from './ShiftEditModal';
+import { Button } from '@/components/ui/button';
 import ShiftAlertDialog from './ShiftAlertDialog';
 
 interface ShiftCardProps {
@@ -54,7 +55,7 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
               alt={_employee.employee.name}
               width={30}
               height={30}
-              className='rounded-full'
+              className='w-8 h-8 rounded-full object-cover'
             />
             <p>{_employee.employee.name}</p>
           </div>

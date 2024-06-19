@@ -1,13 +1,13 @@
 'use client';
+import Link from 'next/link';
+import { Menu } from 'lucide-react';
+import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import { Sheet, SheetContent } from '@/components/ui/sheet';
-import { useMobileSidebar } from '@/hooks/useMobileSidebar';
-import { Menu } from 'lucide-react';
-import { usePathname } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import Sidebar from '../clients/_components/Sidebar';
-import Link from 'next/link';
+import { useMobileSidebar } from '@/hooks/useMobileSidebar';
+import { Sheet, SheetContent } from '@/components/ui/sheet';
 
 interface MobileSidebarProps {
   today: string;

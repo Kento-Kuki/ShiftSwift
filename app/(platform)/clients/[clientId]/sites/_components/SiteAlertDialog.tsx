@@ -1,5 +1,5 @@
 'use client';
-import { deleteSite } from '@/actions/deleteSite';
+import { toast } from 'sonner';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,8 +12,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { useAction } from '@/hooks/useAction';
-import React from 'react';
-import { toast } from 'sonner';
+import { deleteSite } from '@/actions/deleteSite';
 
 interface SiteAlertDialogProps {
   id: string;

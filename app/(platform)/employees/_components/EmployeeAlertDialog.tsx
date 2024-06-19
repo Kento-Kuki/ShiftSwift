@@ -1,5 +1,6 @@
 'use client';
-import { deleteEmployee } from '@/actions/deleteEmployee';
+import { toast } from 'sonner';
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,8 +13,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { useAction } from '@/hooks/useAction';
-import React from 'react';
-import { toast } from 'sonner';
+import { deleteEmployee } from '@/actions/deleteEmployee';
 
 interface EmployeeAlertDialogProps {
   id: string;

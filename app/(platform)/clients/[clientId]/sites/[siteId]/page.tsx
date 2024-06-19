@@ -1,8 +1,10 @@
-import { Separator } from '@/components/ui/separator';
-import { db } from '@/lib/db';
 import { notFound } from 'next/navigation';
+
+import { db } from '@/lib/db';
 import ShiftCard from './_components/ShiftCard';
 import SiteHeader from './_components/SiteHeader';
+import { Separator } from '@/components/ui/separator';
+
 const SiteIdPage = async ({
   params,
 }: {
@@ -23,7 +25,7 @@ const SiteIdPage = async ({
       shiftAssignments: true,
     },
     orderBy: {
-      date: 'asc',
+      startTime: 'asc',
     },
   });
 

@@ -1,5 +1,6 @@
 'use client';
-import { deleteShift } from '@/actions/deleteShift';
+import { toast } from 'sonner';
+
 import {
   AlertDialog,
   AlertDialogAction,
@@ -12,8 +13,7 @@ import {
   AlertDialogTrigger,
 } from '@/components/ui/alert-dialog';
 import { useAction } from '@/hooks/useAction';
-import React from 'react';
-import { toast } from 'sonner';
+import { deleteShift } from '@/actions/deleteShift';
 
 interface ShiftAlertDialogProps {
   id: string;

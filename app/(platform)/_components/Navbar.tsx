@@ -1,10 +1,10 @@
-import { Logo } from '@/components/Logo';
-import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
-import React from 'react';
-import MobileSidebar from './MobileSidebar';
-import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { format } from 'date-fns';
+import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
+
+import { Logo } from '@/components/Logo';
+import MobileSidebar from './MobileSidebar';
+import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const today = format(new Date(), 'yyyy-MM-dd');

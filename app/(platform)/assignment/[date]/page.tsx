@@ -1,11 +1,9 @@
-import { db } from '@/lib/db';
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
-import { DatePicker } from './_components/DatePicker';
-import { Button } from '@/components/ui/button';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { db } from '@/lib/db';
 import ShiftItem from './_components/ShiftItem';
-import { ShiftWithAssignments } from '@/types';
+import AvailableEmployeesList from './_components/AvailableEmployeesList';
+import DateNavigationButtons from './_components/DateNavigationButtons';
 
 const AssignmentDatePage = async ({
   params: { date },
@@ -38,28 +36,34 @@ const AssignmentDatePage = async ({
     },
   });
 
+  const employees = await db.employee.findMany({
+    where: {
+      orgId,
+      shiftAssignments: {
+        none: {
+          shift: {
+            date: new Date(date),
+          },
+        },
+      },
+    },
+  });
+
   if (!shifts) {
     return <div>No shifts found</div>;
   }
+
   return (
-    <main className='mt-20 container flex h-full'>
+    <main className='pt-14 pl-4 w-full 2xl:max-w-screen-2xl mx-auto h-full flex'>
       <div className='flex-1'>
-        <div className='flex items-center justify-center md:justify-start gap-x-5 '>
-          <Button variant={'primary'} size={'icon'}>
-            <ChevronLeft className='h-4 w-4' />
-          </Button>
-          <DatePicker currentDate={date} />
-          <Button variant={'primary'} size={'icon'}>
-            <ChevronRight className='h-4 w-4' />
-          </Button>
-        </div>
+        <DateNavigationButtons date={date} />
         <div className='flex flex-col gap-y-4 mt-5 mr-5'>
           {shifts.map((shift) => (
             <ShiftItem key={shift.id} shift={shift} />
           ))}
         </div>
       </div>
-      <div className='h-full flex-shrink-0 w-60 bg-white/80'>Employees</div>
+      <AvailableEmployeesList employees={employees} />
     </main>
   );
 };

@@ -24,6 +24,8 @@ interface FormDatePickerProps {
   className?: string;
   defaultValue?: Date;
   onBlur?: () => void;
+  date: Date | undefined;
+  setDate: (date: Date | undefined) => void;
 }
 export function FormDatePicker({
   id,
@@ -34,8 +36,9 @@ export function FormDatePicker({
   className,
   defaultValue,
   onBlur,
+  date,
+  setDate,
 }: FormDatePickerProps) {
-  const [date, setDate] = useState<Date | undefined>(defaultValue);
   const [isOpen, setIsOpen] = useState(false);
   const { pending } = useFormStatus();
 
@@ -61,13 +64,7 @@ export function FormDatePicker({
                 )}
               >
                 <CalendarIcon className='mr-2 h-4 w-4' />
-                {date ? (
-                  format(date, 'PPP')
-                ) : defaultValue ? (
-                  format(defaultValue, 'PPP')
-                ) : (
-                  <span>Pick a date</span>
-                )}
+                {date ? format(date, 'PPP') : <span>Pick a date</span>}
               </Button>
             </PopoverTrigger>
             <PopoverContent className='w-auto p-0' align='start'>
@@ -75,11 +72,12 @@ export function FormDatePicker({
                 disabled={disabled || pending}
                 mode='single'
                 selected={date}
-                onSelect={(date) => {
-                  setDate(date);
+                onSelect={(selectedDate) => {
+                  setDate(selectedDate);
                   setIsOpen(false);
                 }}
                 initialFocus
+                required={required}
               />
             </PopoverContent>
           </Popover>

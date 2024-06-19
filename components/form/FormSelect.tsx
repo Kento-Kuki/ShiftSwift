@@ -1,4 +1,3 @@
-import { useFormStatus } from 'react-dom';
 import Select, {
   GroupBase,
   OnChangeValue,
@@ -7,7 +6,7 @@ import Select, {
 } from 'react-select';
 import { Label } from '../ui/label';
 import FormErrors from './FormErrors';
-import { useState } from 'react';
+import { useFormStatus } from 'react-dom';
 
 interface FormSelectProps<
   Option,
@@ -26,7 +25,9 @@ interface FormSelectProps<
   errors?: Record<string, string[] | undefined>;
   hideSelectedOptions?: boolean;
   onBlur?: () => void;
-  defaultValue?: Option | Option[] | null;
+  selectedOption: Option | Option[] | null;
+  setSelectedOption: (option: Option | Option[] | null) => void;
+  isLoading?: boolean;
 }
 
 export const FormSelect = <
@@ -45,12 +46,11 @@ export const FormSelect = <
   autoFocus,
   errors,
   hideSelectedOptions = true,
-  defaultValue,
   onBlur,
+  selectedOption,
+  setSelectedOption,
+  isLoading = false,
 }: FormSelectProps<Option, IsMulti, Group>) => {
-  const [selectedOption, setSelectedOption] = useState<
-    Option | Option[] | null
-  >(null);
   const { pending } = useFormStatus();
 
   const onChange = (
@@ -65,7 +65,7 @@ export const FormSelect = <
   };
 
   return (
-    <div className=' space-y-2'>
+    <div className='space-y-2'>
       <div className='space-y-1'>
         {label ? (
           <Label
@@ -78,9 +78,11 @@ export const FormSelect = <
         <Select
           instanceId={id}
           id={id}
-          placeholder={placeholder}
-          isDisabled={isDisabled || pending}
-          defaultValue={defaultValue}
+          placeholder={
+            !options.length && !isLoading ? 'No options' : placeholder
+          }
+          isDisabled={isDisabled || pending || isLoading || !options.length}
+          defaultValue={selectedOption}
           options={options}
           autoFocus={autoFocus}
           onChange={onChange}

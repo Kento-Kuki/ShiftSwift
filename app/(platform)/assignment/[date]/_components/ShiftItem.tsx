@@ -1,8 +1,7 @@
-import { Badge } from '@/components/ui/badge';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { ShiftWithAssignments } from '@/types';
-import Image from 'next/image';
 import EmployeeItem from './EmployeeItem';
+import { Badge } from '@/components/ui/badge';
+import { ShiftWithAssignments } from '@/types';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 interface ShiftItemProps {
   shift: ShiftWithAssignments;
@@ -16,8 +15,8 @@ const ShiftItem = ({ shift }: ShiftItemProps) => {
           {shift.site?.name}
         </h2>
       </CardHeader>
-      <CardContent className='flex justify-between items-top p-2'>
-        <div className='flex flex-col gap-y-2 flex-1 text-sm text-gray-600 '>
+      <CardContent className='flex justify-between items-top py-0'>
+        <div className='flex flex-col gap-y-2 flex-1 text-sm text-gray-600 py-4 '>
           <p>
             Time:{' '}
             {shift.startTime.toLocaleTimeString([], {
@@ -41,7 +40,7 @@ const ShiftItem = ({ shift }: ShiftItemProps) => {
           </div>
           <p>Description: {shift.site?.description}</p>
         </div>
-        <div className='flex-shrink-0 w-2/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-2 bg-slate-100 p-2 gap-2 h-full rounded-sm'>
+        <div className='flex-shrink-0 w-2/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-2 p-4 gap-3 h-full rounded-sm'>
           {shift.shiftAssignments.map((assignment) => (
             <EmployeeItem key={assignment.id} employee={assignment.employee} />
           ))}
