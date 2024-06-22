@@ -32,6 +32,13 @@ const AssignmentDatePage = async ({
         },
       },
     },
+    orderBy: {
+      site: {
+        client: {
+          name: 'asc',
+        },
+      },
+    },
   });
 
   const employees = await db.employee.findMany({
@@ -45,6 +52,9 @@ const AssignmentDatePage = async ({
         },
       },
     },
+    orderBy: {
+      name: 'asc',
+    },
   });
 
   if (!shifts) {
@@ -52,7 +62,7 @@ const AssignmentDatePage = async ({
   }
 
   return (
-    <main className='pt-14 pb-8 pl-4 w-full 2xl:max-w-screen-xl mx-auto'>
+    <main className='pt-14 pl-4 w-full 2xl:max-w-screen-xl mx-auto h-screen'>
       <AssignmentContainer date={date} shifts={shifts} employees={employees} />
     </main>
   );

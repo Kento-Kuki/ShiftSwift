@@ -24,7 +24,7 @@ const EmployeeItem = ({ employee, shiftId = null }: EmployeeItemProps) => {
       {...attributes}
       key={employee.id}
       className={cn(
-        'flex items-center h-full bg-sky-300 rounded-sm p-2 truncate w-full justify-center hover:bg-sky-400',
+        'flex items-center h-full bg-sky-300 rounded-sm p-2 truncate w-full justify-center hover:bg-sky-400 ',
         isDragging && 'opacity-80'
       )}
     >

@@ -4,14 +4,7 @@ import ShiftItem from './ShiftItem';
 import AvailableEmployeesList from './AvailableEmployeesList';
 import { Employee } from '@prisma/client';
 import { ShiftWithAssignments } from '@/types';
-import {
-  DndContext,
-  DragEndEvent,
-  DragStartEvent,
-  closestCenter,
-  closestCorners,
-  pointerWithin,
-} from '@dnd-kit/core';
+import { DndContext, DragEndEvent, pointerWithin } from '@dnd-kit/core';
 import { useAction } from '@/hooks/useAction';
 import { createShiftAssignment } from '@/actions/createShiftAssignment';
 import { toast } from 'sonner';
@@ -29,7 +22,7 @@ const AssignmentContainer = ({
 }: AssignmentContainerProps) => {
   const { execute: assignToShift } = useAction(createShiftAssignment, {
     onSuccess: () => {
-      toast.success('Employee is assigned to the shift successfully');
+      toast.success('Assigned successfully');
     },
     onError: (error) => {
       toast.error(error);
@@ -37,8 +30,9 @@ const AssignmentContainer = ({
   });
 
   const { execute: updateShift } = useAction(updateShiftAssignment, {
-    onSuccess: () => {
-      toast.success('Employee is assigned to the shift successfully');
+    onSuccess: (data) => {
+      console.log(data);
+      toast.success('Assigned successfully');
     },
     onError: (error) => {
       toast.error(error);
@@ -90,9 +84,9 @@ const AssignmentContainer = ({
       collisionDetection={pointerWithin}
     >
       <div className='flex h-full'>
-        <div className='flex-1'>
+        <div className='flex-1 flex flex-col'>
           <DateNavigationButtons date={date} />
-          <div className='flex flex-col gap-y-4 mt-5 mr-5 '>
+          <div className='flex flex-col gap-y-4 my-5 mr-5 assignment-container'>
             {shifts.map((shift) => (
               <ShiftItem key={shift.id} shift={shift} />
             ))}

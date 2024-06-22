@@ -21,7 +21,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   try {
     newShiftAssignment = await db.$transaction(async (prisma) => {
-      await prisma.shiftAssignment.delete({
+      const deletedShiftAssignment = await prisma.shiftAssignment.delete({
         where: {
           shiftId_employeeId: {
             shiftId: currentShiftId,
@@ -30,7 +30,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         },
       });
 
-      if (targetShiftId === 'available-employees') return;
+      if (targetShiftId === 'available-employees')
+        return deletedShiftAssignment;
 
       const shiftAssignment = await prisma.shiftAssignment.create({
         data: {
@@ -46,7 +47,6 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       error: 'Failed to assign employee to the shift',
     };
   }
-
   revalidatePath('/assignment');
   return { data: newShiftAssignment };
 };

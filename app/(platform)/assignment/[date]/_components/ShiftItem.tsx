@@ -39,11 +39,17 @@ const ShiftItem = ({ shift }: ShiftItemProps) => {
           <p>Location: {shift.site?.location}</p>
           <div>
             Requirements:{' '}
-            {shift.site?.requirements.map((requirement) => (
-              <Badge variant={'secondary'} key={requirement}>
-                {requirement}
-              </Badge>
-            ))}
+            {shift.site.requirements[0] === '' ? (
+              <span className=' text-xs font-medium text-gray-800 pl-1'>
+                No requirements
+              </span>
+            ) : (
+              shift.site.requirements.map((requirement) => (
+                <Badge variant={'secondary'} key={requirement}>
+                  {requirement}
+                </Badge>
+              ))
+            )}
           </div>
           <p>Description: {shift.site?.description}</p>
         </div>
