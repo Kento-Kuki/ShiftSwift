@@ -1,9 +1,7 @@
 import { auth } from '@clerk/nextjs/server';
 import { redirect } from 'next/navigation';
 import { db } from '@/lib/db';
-import ShiftItem from './_components/ShiftItem';
-import AvailableEmployeesList from './_components/AvailableEmployeesList';
-import DateNavigationButtons from './_components/DateNavigationButtons';
+import AssignmentContainer from './_components/AssignmentContainer';
 
 const AssignmentDatePage = async ({
   params: { date },
@@ -54,16 +52,8 @@ const AssignmentDatePage = async ({
   }
 
   return (
-    <main className='pt-14 pl-4 w-full 2xl:max-w-screen-2xl mx-auto h-full flex'>
-      <div className='flex-1'>
-        <DateNavigationButtons date={date} />
-        <div className='flex flex-col gap-y-4 mt-5 mr-5'>
-          {shifts.map((shift) => (
-            <ShiftItem key={shift.id} shift={shift} />
-          ))}
-        </div>
-      </div>
-      <AvailableEmployeesList employees={employees} />
+    <main className='pt-14 pb-8 pl-4 w-full 2xl:max-w-screen-xl mx-auto'>
+      <AssignmentContainer date={date} shifts={shifts} employees={employees} />
     </main>
   );
 };
