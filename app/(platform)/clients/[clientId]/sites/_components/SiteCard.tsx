@@ -35,16 +35,16 @@ export const SiteCard = ({ site }: SiteCardProps) => {
               Requirements
             </h3>
             <div className='flex flex-wrap gap-2'>
-              {site.requirements.length > 0 ? (
+              {site.requirements[0] === '' ? (
+                <span className=' text-xs font-medium text-gray-800 pl-1'>
+                  No requirements
+                </span>
+              ) : (
                 site.requirements.map((requirement) => (
                   <Badge variant={'secondary'} key={requirement}>
                     {requirement}
                   </Badge>
                 ))
-              ) : (
-                <span className=' text-xs font-medium text-gray-800 pl-1'>
-                  No requirements
-                </span>
               )}
             </div>
           </div>
