@@ -22,7 +22,7 @@ export const useAvailableEmployees = (
       startTime,
       endTime,
     ],
-    queryFn: () => {
+    queryFn: async (): Promise<Employee[]> => {
       if (
         Array.isArray(startTime) ||
         Array.isArray(endTime) ||

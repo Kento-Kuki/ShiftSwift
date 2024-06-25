@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 
 const Navbar = () => {
   const today = format(new Date(), 'yyyy-MM-dd');
+  const yearMonth = today.substring(0, 7);
   return (
     <nav className='flex items-center bg-white/80 fixed w-full h-14 px-4 top-0 border-b shadow-sm '>
       <MobileSidebar today={today} />
@@ -33,6 +34,12 @@ const Navbar = () => {
             className='hidden md:inline hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
           >
             Assignment
+          </Link>
+          <Link
+            href={`/schedule/${yearMonth}`}
+            className='hidden md:inline hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
+          >
+            Schedule
           </Link>
           <Link
             href={'/employees'}

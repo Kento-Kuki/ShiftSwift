@@ -13,7 +13,7 @@ const AssignmentDatePage = async ({
   const shifts = await db.shift.findMany({
     where: {
       date: {
-        equals: new Date(date),
+        equals: new Date(`${date}T00:00:00`),
       },
     },
     include: {
@@ -47,7 +47,7 @@ const AssignmentDatePage = async ({
       shiftAssignments: {
         none: {
           shift: {
-            date: new Date(date),
+            date: new Date(`${date}T00:00:00`),
           },
         },
       },
@@ -56,10 +56,6 @@ const AssignmentDatePage = async ({
       name: 'asc',
     },
   });
-
-  if (!shifts) {
-    return <div>No shifts found</div>;
-  }
 
   return (
     <main className='pt-14 pl-4 w-full 2xl:max-w-screen-xl mx-auto h-screen'>

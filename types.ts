@@ -15,3 +15,9 @@ export type ShiftWithAssignments = Shift & {
     };
   };
 };
+
+export type EmployeeWithShifts = Employee & {
+  shiftAssignments: {
+    shift: Shift;
+  }[];
+};

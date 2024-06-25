@@ -105,9 +105,9 @@ const ShiftEditModal = ({
 
     // TODO: Add detected changes
     execute({
-      date,
-      startTime,
-      endTime,
+      date: new Date(`${date}T00:00:00`).toISOString(),
+      startTime: new Date(`${date}T${startTime}`).toISOString(),
+      endTime: new Date(`${date}T${endTime}`).toISOString(),
       headcount: parseInt(headcount),
       employees,
       siteId,
