@@ -15,7 +15,7 @@ const ShiftItem = ({ shift }: ShiftItemProps) => {
     data: { shift },
   });
   return (
-    <Card className='w-full'>
+    <Card className='w-full my-3'>
       <CardHeader className='border-b p-3'>
         <h2 className='font-medium'>
           <span className='font-bold'>{shift.site?.client?.name}</span> |{' '}
@@ -56,7 +56,7 @@ const ShiftItem = ({ shift }: ShiftItemProps) => {
         <div
           ref={setNodeRef}
           className={cn(
-            'flex-shrink-0 w-2/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-2 p-4 gap-3 h-full rounded-sm my-auto',
+            'flex-shrink-0 w-2/5 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 grid-rows-2 p-4 gap-3 h-full rounded-sm my-auto ',
             isOver && 'bg-slate-100'
           )}
         >

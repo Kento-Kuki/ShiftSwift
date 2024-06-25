@@ -10,8 +10,6 @@ export async function GET(request: NextRequest) {
     }
     const { searchParams } = new URL(request.url);
     const date = searchParams.get('date');
-    const startTime = new Date(`${date}T${searchParams.get('startTime')}:00Z`);
-    const endTime = new Date(`${date}T${searchParams.get('endTime')}:00Z`);
 
     const availableEmployees = await db.employee.findMany({
       where: {
@@ -19,21 +17,15 @@ export async function GET(request: NextRequest) {
         shiftAssignments: {
           none: {
             shift: {
-              AND: [
-                {
-                  startTime: {
-                    lte: endTime,
-                  },
-                  endTime: {
-                    gte: startTime,
-                  },
-                },
-              ],
+              date: {
+                equals: new Date(`${date}T00:00:00`),
+              },
             },
           },
         },
       },
     });
+
     return NextResponse.json(availableEmployees);
   } catch (error) {
     console.error(error);

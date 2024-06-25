@@ -1,9 +1,10 @@
 'use client';
-import { Input } from '@/components/ui/input';
-import EmployeeItem from './EmployeeItem';
 import { Employee } from '@prisma/client';
 import { useDroppable } from '@dnd-kit/core';
+
 import { cn } from '@/lib/utils';
+import EmployeeItem from './EmployeeItem';
+import { Input } from '@/components/ui/input';
 
 interface AvailableEmployeesListProps {
   employees: Employee[];

@@ -16,6 +16,7 @@ const EmployeeItem = ({ employee, shiftId = null }: EmployeeItemProps) => {
   const style = {
     transform: CSS.Translate.toString(transform),
   };
+
   return (
     <div
       ref={setNodeRef}

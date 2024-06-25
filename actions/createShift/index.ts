@@ -32,9 +32,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
       const shift = await prisma.shift.create({
         data: {
           siteId,
-          date: new Date(`${date}T00:00:00Z`),
-          startTime: new Date(`${date}T${startTime}:00Z`),
-          endTime: new Date(`${date}T${endTime}:00Z`),
+          date,
+          startTime,
+          endTime,
           headcount,
         },
       });
