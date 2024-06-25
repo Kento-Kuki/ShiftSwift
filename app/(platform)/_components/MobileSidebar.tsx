@@ -56,6 +56,12 @@ const MobileSidebar = ({ today }: MobileSidebarProps) => {
               Assignment
             </Link>
             <Link
+              href={`/schedule`}
+              className='hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
+            >
+              Schedule
+            </Link>
+            <Link
               href={'/employees'}
               className='hover:opacity-75 transition text-sm font-base text-gray-600'
             >

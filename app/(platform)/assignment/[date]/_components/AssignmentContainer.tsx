@@ -4,11 +4,19 @@ import ShiftItem from './ShiftItem';
 import AvailableEmployeesList from './AvailableEmployeesList';
 import { Employee } from '@prisma/client';
 import { ShiftWithAssignments } from '@/types';
-import { DndContext, DragEndEvent, pointerWithin } from '@dnd-kit/core';
+import {
+  DndContext,
+  DragEndEvent,
+  DragOverlay,
+  DragStartEvent,
+  pointerWithin,
+} from '@dnd-kit/core';
 import { useAction } from '@/hooks/useAction';
 import { createShiftAssignment } from '@/actions/createShiftAssignment';
 import { toast } from 'sonner';
 import { updateShiftAssignment } from '@/actions/updateShiftAssignment';
+import { useState } from 'react';
+import EmployeeItem from './EmployeeItem';
 
 interface AssignmentContainerProps {
   shifts: ShiftWithAssignments[];
@@ -38,6 +46,7 @@ const AssignmentContainer = ({
       toast.error(error);
     },
   });
+
   const onDragEnd = (event: DragEndEvent) => {
     const { active, over } = event;
 
@@ -86,7 +95,7 @@ const AssignmentContainer = ({
       <div className='flex h-full'>
         <div className='flex-1 flex flex-col'>
           <DateNavigationButtons date={date} />
-          <div className='flex flex-col gap-y-4 my-5 mr-5 assignment-container'>
+          <div className='flex flex-col mt-3 mr-5 '>
             {shifts.map((shift) => (
               <ShiftItem key={shift.id} shift={shift} />
             ))}
