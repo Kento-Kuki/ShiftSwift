@@ -1,5 +1,4 @@
 'use client';
-
 import { toast } from 'sonner';
 import { X } from 'lucide-react';
 import { useParams } from 'next/navigation';

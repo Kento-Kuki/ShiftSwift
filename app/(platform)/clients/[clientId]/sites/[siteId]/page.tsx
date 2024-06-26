@@ -15,6 +15,9 @@ const SiteIdPage = async ({
       id: params.siteId,
       clientId: params.clientId,
     },
+    include: {
+      client: true,
+    },
   });
 
   const shifts = await db.shift.findMany({
@@ -32,7 +35,7 @@ const SiteIdPage = async ({
   if (!site) notFound();
   return (
     <div className='w-full'>
-      <SiteHeader site={site} />
+      <SiteHeader site={site} client={site.client} />
       <Separator className='w-full ' />
       <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 m-2 my-5'>
         {shifts.map((shift) => (

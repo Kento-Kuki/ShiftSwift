@@ -5,23 +5,24 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { Site } from '@prisma/client';
+import { Client, Site } from '@prisma/client';
 import Info from '../../_components/Info';
 import { Button } from '@/components/ui/button';
 import FormShiftPopover from './FormShiftPopover';
 
 interface SiteHeaderProps {
   site: Site;
+  client: Client;
 }
 
-const SiteHeader = ({ site }: SiteHeaderProps) => {
+const SiteHeader = ({ site, client }: SiteHeaderProps) => {
   return (
     <div className='flex justify-between items-center my-2 mx-1'>
       <Breadcrumb>
         <BreadcrumbList className='text-black font-bold text-lg '>
           <BreadcrumbItem>
             <BreadcrumbLink href={`/clients/${site.clientId}/sites`}>
-              <Info />
+              <Info client={client} />
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />

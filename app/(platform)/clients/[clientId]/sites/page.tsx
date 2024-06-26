@@ -19,14 +19,14 @@ const SitesPage = async ({ params }: { params: { clientId: string } }) => {
   return (
     <div className='w-full'>
       <div className='flex justify-between items-center my-2 mx-1'>
-        <Info />
+        <Info client={client} />
         <FormSitePopover side='bottom' align='end' sideOffset={10}>
           <Button variant={'primary'} size={'sm'}>
             Add New Site
           </Button>
         </FormSitePopover>
       </div>
-      <Separator className='w-full ' />
+      <Separator className='w-full' />
       <div>
         <SiteList clientId={client.id} />
       </div>

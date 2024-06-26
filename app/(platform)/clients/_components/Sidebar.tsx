@@ -1,18 +1,16 @@
 'use client';
 import { Client } from '@prisma/client';
 import { useLocalStorage } from 'usehooks-ts';
-import { useOrganization } from '@clerk/nextjs';
-import { useQuery } from '@tanstack/react-query';
 import { ContactRound, Plus } from 'lucide-react';
 
 import NavItem from './NavItem';
-import { fetcher } from '@/lib/fetcher';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import FormClientPopover from './FormClientPopover';
 import { Accordion } from '@/components/ui/accordion';
 
 interface SidebarProps {
+  clients: Client[];
   storageKey?: string;
   popoverSide?: 'left' | 'right' | 'top' | 'bottom';
   popoverAlign?: 'start' | 'center' | 'end';
@@ -20,6 +18,7 @@ interface SidebarProps {
 }
 
 const Sidebar = ({
+  clients,
   storageKey = 't-sidebar-state',
   popoverSide = 'right',
   popoverAlign = 'start',
@@ -29,11 +28,6 @@ const Sidebar = ({
     storageKey,
     {}
   );
-  const { organization } = useOrganization();
-  const { data: clients, isLoading } = useQuery<Client[]>({
-    queryKey: ['clients', organization?.id],
-    queryFn: () => fetcher('/api/clients'),
-  });
 
   const defaultAccordionValue = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
@@ -79,13 +73,7 @@ const Sidebar = ({
       </div>
 
       {/* SidebarList */}
-      {isLoading ? (
-        <div className='space-y-2'>
-          <NavItem.Skeleton />
-          <NavItem.Skeleton />
-          <NavItem.Skeleton />
-        </div>
-      ) : clients?.length === 0 ? (
+      {clients?.length === 0 ? (
         <div className='flex flex-col items-center mt-3'>
           <p className='text-lg'>You don&apos;t have any clients.</p>
           <p>Let&apos;s add a new one!</p>

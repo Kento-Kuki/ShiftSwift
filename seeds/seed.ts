@@ -3,10 +3,11 @@ import { defaultImages } from '../constants/images';
 import { v4 as uuidv4 } from 'uuid';
 const main = async () => {
   const db = new PrismaClient();
+  const orgId = 'org_2gwAQxe2J0rItPAg6qtS6vx5etz';
   const employees = [
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'John Doe',
       email: 'john.doe@example.com',
@@ -16,7 +17,7 @@ const main = async () => {
     },
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'Jane Smith',
       email: 'jane.smith@example.com',
@@ -26,7 +27,7 @@ const main = async () => {
     },
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'Alice Johnson',
       email: 'alice.johnson@example.com',
@@ -36,7 +37,7 @@ const main = async () => {
     },
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'Bob Brown',
       email: 'bob.brown@example.com',
@@ -46,7 +47,7 @@ const main = async () => {
     },
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'Carol White',
       email: 'carol.white@example.com',
@@ -56,7 +57,7 @@ const main = async () => {
     },
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'David Green',
       email: 'david.green@example.com',
@@ -66,7 +67,7 @@ const main = async () => {
     },
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'Eva Blue',
       email: 'eva.blue@example.com',
@@ -76,7 +77,7 @@ const main = async () => {
     },
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'Frank Yellow',
       email: 'frank.yellow@example.com',
@@ -86,7 +87,7 @@ const main = async () => {
     },
     {
       id: uuidv4(),
-      orgId: 'org_2gwAQxe2J0rItPAg6qtS6vx5etz',
+      orgId: orgId,
       userId: uuidv4(),
       name: 'Grace Black',
       email: 'grace.black@example.com',
