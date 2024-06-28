@@ -19,8 +19,8 @@ export default function NotFound() {
           Oops! Page not found.
         </h1>
         <p className='text-muted-foreground md:text-lg'>
-          The page you're looking for doesn't exist. Let's get you back on
-          track.
+          The page you&apos;re looking for doesn&apos;t exist. Let&apos;s get
+          you back on track.
         </p>
 
         <Button className='px-8' size={'lg'} onClick={() => router.back()}>
