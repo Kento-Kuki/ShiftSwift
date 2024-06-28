@@ -45,7 +45,7 @@ const ShiftEditModal = ({
         value: formatDateToTime(shift.endTime),
       },
     };
-  }, [shift, assignedEmployees]);
+  }, [shift.startTime, shift.endTime]);
   const assignedEmployeesOptions = useMemo(
     () =>
       assignedEmployees.map((employee) => ({
