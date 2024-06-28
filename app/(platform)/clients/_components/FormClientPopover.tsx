@@ -4,7 +4,6 @@ import { toast } from 'sonner';
 import { X } from 'lucide-react';
 import { ElementRef, useRef } from 'react';
 import { useRouter } from 'next/navigation';
-import { useQueryClient } from '@tanstack/react-query';
 
 import {
   Popover,
@@ -34,16 +33,12 @@ const FormClientPopover = ({
 }: FormPopoverProps) => {
   const closeRef = useRef<ElementRef<'button'>>(null);
   const router = useRouter();
-  const queryClient = useQueryClient();
 
   // Server Action
   const { execute, fieldErrors } = useAction(createClient, {
     onSuccess: (data) => {
       toast.success('Client created');
       closeRef.current?.click();
-      queryClient.invalidateQueries({
-        queryKey: ['clients'],
-      });
       router.push(`/clients/${data.id}/sites`);
     },
     onError: (error) => {

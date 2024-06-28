@@ -35,20 +35,25 @@ import FormTextarea from '@/components/form/FormTextarea';
 import FormButton from '@/components/form/FormButton';
 import { deleteClient } from '@/actions/deleteClient';
 import { Client } from '@prisma/client';
+import { useEffect, useState } from 'react';
 
 interface SettingCardProps {
-  client: Client | null;
+  client: Client;
 }
 const SettingCard = ({ client }: SettingCardProps) => {
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) null;
+
   const router = useRouter();
   const params = useParams();
-  const queryClient = useQueryClient();
   const { execute: updateExecute, fieldErrors } = useAction(updateClient, {
     onSuccess: () => {
       toast.success('Client updated');
-      queryClient.invalidateQueries({
-        queryKey: ['clients'],
-      });
       router.refresh();
     },
     onError: () => {
@@ -58,9 +63,6 @@ const SettingCard = ({ client }: SettingCardProps) => {
   const { execute: deleteExecute } = useAction(deleteClient, {
     onSuccess: () => {
       toast.success(`${client?.name} deleted`);
-      queryClient.invalidateQueries({
-        queryKey: ['clients'],
-      });
       router.push('/clients');
     },
     onError: () => {

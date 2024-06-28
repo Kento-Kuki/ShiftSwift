@@ -5,23 +5,25 @@ import {
   BreadcrumbList,
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
-import { Site } from '@prisma/client';
+import { Client, Site } from '@prisma/client';
 import Info from '../../_components/Info';
 import { Button } from '@/components/ui/button';
 import FormShiftPopover from './FormShiftPopover';
+import { Plus } from 'lucide-react';
 
 interface SiteHeaderProps {
   site: Site;
+  client: Client;
 }
 
-const SiteHeader = ({ site }: SiteHeaderProps) => {
+const SiteHeader = ({ site, client }: SiteHeaderProps) => {
   return (
     <div className='flex justify-between items-center my-2 mx-1'>
       <Breadcrumb>
         <BreadcrumbList className='text-black font-bold text-lg '>
           <BreadcrumbItem>
             <BreadcrumbLink href={`/clients/${site.clientId}/sites`}>
-              <Info />
+              <Info client={client} />
             </BreadcrumbLink>
           </BreadcrumbItem>
           <BreadcrumbSeparator />
@@ -32,7 +34,10 @@ const SiteHeader = ({ site }: SiteHeaderProps) => {
       </Breadcrumb>
       <FormShiftPopover side='left' align='start' sideOffset={10}>
         <Button variant={'primary'} size={'sm'}>
-          Add New Shift
+          <span className='hidden md:inline'>Add New Shift</span>
+          <span className='inline md:hidden'>
+            <Plus className='w-4 h-4' />
+          </span>
         </Button>
       </FormShiftPopover>
     </div>

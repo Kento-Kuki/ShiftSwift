@@ -1,9 +1,8 @@
 'use client';
-
 import { toast } from 'sonner';
 import { X } from 'lucide-react';
 import { useParams } from 'next/navigation';
-import { ElementRef, useMemo, useRef } from 'react';
+import { ElementRef, useEffect, useMemo, useRef, useState } from 'react';
 
 import {
   Popover,
@@ -35,6 +34,7 @@ const FormShiftPopover = ({
   align = 'center',
   sideOffset = 10,
 }: FormPopoverProps) => {
+  const [isMounted, setIsMounted] = useState(false);
   const { clientId, siteId } = useParams() as {
     clientId: string;
     siteId: string;
@@ -89,6 +89,11 @@ const FormShiftPopover = ({
       clientId,
     });
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+  if (!isMounted) null;
   return (
     <Popover open={isOpen} onOpenChange={setIsOpen}>
       <PopoverTrigger asChild>{children}</PopoverTrigger>
