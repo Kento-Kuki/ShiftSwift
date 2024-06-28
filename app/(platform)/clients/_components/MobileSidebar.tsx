@@ -1,19 +1,20 @@
 'use client';
 import Link from 'next/link';
-import { Menu } from 'lucide-react';
+import { Menu, PanelRightClose } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
-import Sidebar from '../clients/_components/Sidebar';
+import Sidebar from '../_components/Sidebar';
 import { useMobileSidebar } from '@/hooks/useMobileSidebar';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
+import { Client } from '@prisma/client';
 
 interface MobileSidebarProps {
-  today: string;
+  clients: Client[];
 }
 
-const MobileSidebar = ({ today }: MobileSidebarProps) => {
+const MobileSidebar = ({ clients }: MobileSidebarProps) => {
   const pathname = usePathname();
   const [isMounted, setIsMounted] = useState(false);
   const onOpen = useMobileSidebar((state) => state.onOpen);
@@ -28,47 +29,22 @@ const MobileSidebar = ({ today }: MobileSidebarProps) => {
     onClose();
   }, [pathname, onClose]);
 
-  if (!isMounted) null;
+  if (!isMounted) return null;
 
   return (
     <>
       <Button
-        className='block md:hidden mr-2'
+        className='block md:hidden'
         onClick={onOpen}
         variant={'ghost'}
-        size={'sm'}
+        size={'icon'}
       >
-        <Menu className='h-4 w-4' />
+        <PanelRightClose className='w-6 h-6 mx-auto' />
       </Button>
       <Sheet open={isOpen} onOpenChange={onClose}>
         <SheetContent side={'left'} className='p-2 pt-10'>
-          <div className='flex justify-center items-center gap-2 py-4'>
-            <Link
-              href={'/clients'}
-              className='hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
-            >
-              Clients
-            </Link>
-            <Link
-              href={`/assignment/${today}`}
-              className='hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
-            >
-              Assignment
-            </Link>
-            <Link
-              href={`/schedule`}
-              className='hover:opacity-75 transition text-sm font-base text-gray-600 mr-2'
-            >
-              Schedule
-            </Link>
-            <Link
-              href={'/employees'}
-              className='hover:opacity-75 transition text-sm font-base text-gray-600'
-            >
-              Employees
-            </Link>
-          </div>
           <Sidebar
+            clients={clients}
             storageKey='t-sidebar-mobile-state'
             popoverSide='bottom'
             popoverAlign='center'

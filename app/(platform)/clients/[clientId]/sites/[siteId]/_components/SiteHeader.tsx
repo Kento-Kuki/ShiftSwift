@@ -9,6 +9,7 @@ import { Client, Site } from '@prisma/client';
 import Info from '../../_components/Info';
 import { Button } from '@/components/ui/button';
 import FormShiftPopover from './FormShiftPopover';
+import { Plus } from 'lucide-react';
 
 interface SiteHeaderProps {
   site: Site;
@@ -33,7 +34,10 @@ const SiteHeader = ({ site, client }: SiteHeaderProps) => {
       </Breadcrumb>
       <FormShiftPopover side='left' align='start' sideOffset={10}>
         <Button variant={'primary'} size={'sm'}>
-          Add New Shift
+          <span className='hidden md:inline'>Add New Shift</span>
+          <span className='inline md:hidden'>
+            <Plus className='w-4 h-4' />
+          </span>
         </Button>
       </FormShiftPopover>
     </div>

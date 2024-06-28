@@ -4,27 +4,15 @@ import { Plus } from 'lucide-react';
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 
 import { Logo } from '@/components/Logo';
-import MobileSidebar from './MobileNavbar';
 import { Button } from '@/components/ui/button';
-import { auth } from '@clerk/nextjs/server';
-import { redirect } from 'next/navigation';
-import { db } from '@/lib/db';
+import MobileNavbar from './MobileNavbar';
 
 const Navbar = async () => {
-  const { orgId } = auth();
-  if (!orgId) return redirect('/select-org');
-
-  const clients = await db.client.findMany({
-    where: { orgId },
-    orderBy: {
-      createdAt: 'asc',
-    },
-  });
   const today = format(new Date(), 'yyyy-MM-dd');
   const yearMonth = today.substring(0, 7);
   return (
-    <nav className='flex items-center bg-white/80 fixed w-full h-14 px-4 top-0 border-b shadow-sm '>
-      <MobileSidebar today={today} yearMonth={yearMonth} clients={clients} />
+    <nav className='flex items-center bg-white/90 fixed w-full h-14 px-4 top-0 border-b shadow-sm z-50'>
+      <MobileNavbar today={today} yearMonth={yearMonth} />
       <div className='md:hidden block'>
         <Link href={'/register-employee'}>
           <Button size={'icon'} variant={'primary'}>

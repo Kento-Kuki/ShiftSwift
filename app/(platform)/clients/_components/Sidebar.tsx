@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import FormClientPopover from './FormClientPopover';
 import { Accordion } from '@/components/ui/accordion';
+import { useEffect, useState } from 'react';
 
 interface SidebarProps {
   clients: Client[];
@@ -24,6 +25,7 @@ const Sidebar = ({
   popoverAlign = 'start',
   popoverSideOffset = 10,
 }: SidebarProps) => {
+  const [isMounted, setIsMounted] = useState(false);
   const [expanded, setExpanded] = useLocalStorage<Record<string, any>>(
     storageKey,
     {}
@@ -42,6 +44,12 @@ const Sidebar = ({
   const onExpand = (id: string) => {
     setExpanded((curr) => ({ ...curr, [id]: !expanded[id] }));
   };
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
+
+  if (!isMounted) return null;
   return (
     <div className='flex flex-col gap-y-2'>
       {/* SidebarHeader */}
