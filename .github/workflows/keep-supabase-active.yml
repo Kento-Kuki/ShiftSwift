@@ -1,0 +1,13 @@
+name: Keep Supabase Active
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 毎日0:00に実行
+
+jobs:
+  send-request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Send request to Supabase
+        run: |
+          curl -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" https://osaenrgwaxuhdsevcnac.supabase.co/rest/v1/users?select=*
