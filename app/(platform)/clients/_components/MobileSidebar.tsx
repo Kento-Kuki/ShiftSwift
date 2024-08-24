@@ -1,6 +1,6 @@
 'use client';
-import Link from 'next/link';
-import { Menu, PanelRightClose } from 'lucide-react';
+
+import { PanelRightClose } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { usePathname } from 'next/navigation';
 
