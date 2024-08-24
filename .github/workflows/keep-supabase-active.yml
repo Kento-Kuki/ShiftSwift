@@ -3,6 +3,7 @@ name: Keep Supabase Active
 on:
   schedule:
     - cron: '0 0 * * *' # 毎日0:00に実行
+  workflow_dispatch: # 手動トリガーを追加
 
 jobs:
   send-request:
