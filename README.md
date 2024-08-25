@@ -1,6 +1,6 @@
 # ShiftSwift
 
-ShiftSwift is my portfolio project. ShiftSwift is a schedule management application built using the following technologies.
+Shiftswift is a streamlined app designed for efficient shift management. It provides an intuitive interface that allows users to easily create, edit, and share shift schedules. With Shiftswift, managing shifts, tracking staff schedules, and making adjustments are all straightforward and hassle-free.
 
 Link here:https://shiftswift.vercel.app/
 
