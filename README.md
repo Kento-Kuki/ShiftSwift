@@ -21,3 +21,11 @@ ShiftSwift includes the following key features:
 - Add, edit, and delete clients,sites and shifts.
 - Schedule management with a calendar.
 - User authentication and login.
+
+### Design
+Figma:https://www.figma.com/design/hSiI6kcC1VzQLxR6xolrwN/ShiftSwift?node-id=0-1&t=ooH2g77BRDMCT4ek-0
+
+### Database
+![Shift-Management-App drawio](https://github.com/user-attachments/assets/31d3b6f7-fd27-46af-a639-4d09acab8cde)
+
+
