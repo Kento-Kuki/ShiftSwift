@@ -20,5 +20,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run Prisma script
+      - name: Run compiled JavaScript
         run: node keep-supabase-active.js
+        env:
+          DATABASE_URL: ${{ secrets.DATABASE_URL }}
