@@ -21,4 +21,4 @@ jobs:
         run: npm install
 
       - name: Run Prisma script
-        run: node keep-supabase-active.ts
+        run: node keep-supabase-active.js
