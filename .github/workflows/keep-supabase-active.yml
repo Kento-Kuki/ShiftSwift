@@ -11,4 +11,6 @@ jobs:
     steps:
       - name: Send request to Supabase
         run: |
-          curl -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" https://osaenrgwaxuhdsevcnac.supabase.co/rest/v1/users?select=*
+          curl -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
+          "https://osaenrgwaxuhdsevcnac.supabase.co/rest/v1/employees?select=*"
+
