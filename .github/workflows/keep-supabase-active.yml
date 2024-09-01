@@ -2,13 +2,23 @@ name: Keep Supabase Active
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 毎日0:00に実行
+    - cron: '0 0 * * 1' # 毎週月曜日の0:00に実行
   workflow_dispatch: # 手動トリガーを追加
 
 jobs:
   send-request:
     runs-on: ubuntu-latest
     steps:
-      - name: Send request to Supabase
-        run: |
-          curl -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" https://osaenrgwaxuhdsevcnac.supabase.co/rest/v1/users?select=*
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Prisma script
+        run: node keep-supabase-active.ts
