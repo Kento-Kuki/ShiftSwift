@@ -2,7 +2,7 @@ name: Keep Supabase Active
 
 on:
   schedule:
-    - cron: '0 0 * * *' # 毎日0:00に実行
+    - cron: '0 0 * * 1' # 毎週月曜日の0:00に実行
   workflow_dispatch: # 手動トリガーを追加
 
 jobs:
@@ -13,4 +13,5 @@ jobs:
         run: |
           curl -H "apikey: ${{ secrets.SUPABASE_ANON_KEY }}" \
           "https://osaenrgwaxuhdsevcnac.supabase.co/rest/v1/employees?select=*"
+
 
