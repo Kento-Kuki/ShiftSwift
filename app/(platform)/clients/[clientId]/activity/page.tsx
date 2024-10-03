@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ActivityPage = () => {
-  return <div>Activity</div>;
+  return <div>Sorry!. This feature is not yet available.</div>;
 };
 
 export default ActivityPage;
