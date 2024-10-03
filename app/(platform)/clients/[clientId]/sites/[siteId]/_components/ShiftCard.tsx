@@ -28,8 +28,8 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
     },
   });
 
-  const startTime = new Date(shift.startTime);
-  const endTime = new Date(shift.endTime);
+  const startTime = toZonedTime(new Date(shift.startTime), 'Asia/Tokyo');
+  const endTime = toZonedTime(new Date(shift.endTime), 'Asia/Tokyo');
   const date = toZonedTime(new Date(shift.date), 'Asia/Tokyo');
 
   // const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -39,10 +39,8 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
       <CardHeader>
         <div className='flex justify-between items-center text-gray-400 text-sm'>
           <span>{format(date, 'yyyy/MM/dd')}</span>
-          <span>{format(date, 'yyyy/MM/dd', { timeZone: 'Asia/Tokyo' })}</span>
           <span>
-            {format(startTime, 'HH:mm', { timeZone: 'Asia/Tokyo' })}-
-            {format(endTime, 'HH:mm', { timeZone: 'Asia/Tokyo' })}
+            {format(startTime, 'HH:mm')}-{format(endTime, 'HH:mm')}
           </span>
         </div>
       </CardHeader>
