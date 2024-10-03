@@ -12,6 +12,7 @@ import { db } from '@/lib/db';
 import ShiftEditModal from './ShiftEditModal';
 import { Button } from '@/components/ui/button';
 import ShiftAlertDialog from './ShiftAlertDialog';
+import { time } from 'console';
 
 interface ShiftCardProps {
   shift: Shift;
@@ -32,21 +33,17 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
   const endTime = new Date(shift.endTime);
   const date = new Date(shift.date);
 
-  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  // const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const timeZone = 'Asia/Tokyo';
 
   return (
     <Card className='flex flex-col h-full'>
       <CardHeader>
         <div className='flex justify-between items-center text-gray-400 text-sm'>
-          <span>{shift.date.toISOString()}</span>
+          <span>{format(date, 'yyyy-MM-dd', { timeZone: timeZone })}</span>
           <span>
-            {shift.startTime.toISOString()} - {shift.endTime.toISOString()}
-          </span>
-          <span>{userTimezone}</span>
-          <span>{format(date, 'yyyy-MM-dd', { timeZone: userTimezone })}</span>
-          <span>
-            {format(startTime, 'HH:mm', { timeZone: userTimezone })}-
-            {format(endTime, 'HH:mm', { timeZone: userTimezone })}
+            {format(startTime, 'HH:mm', { timeZone: timeZone })}-
+            {format(endTime, 'HH:mm', { timeZone: timeZone })}
           </span>
         </div>
       </CardHeader>
