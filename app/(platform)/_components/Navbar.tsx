@@ -6,9 +6,11 @@ import { OrganizationSwitcher, UserButton } from '@clerk/nextjs';
 import { Logo } from '@/components/Logo';
 import { Button } from '@/components/ui/button';
 import MobileNavbar from './MobileNavbar';
+import { toZonedTime } from 'date-fns-tz';
 
 const Navbar = async () => {
-  const today = format(new Date(), 'yyyy-MM-dd');
+  const date = toZonedTime(new Date(), 'Asia/Tokyo');
+  const today = format(date, 'yyyy-MM-dd');
   const yearMonth = today.substring(0, 7);
   return (
     <nav className='flex items-center bg-white/90 fixed w-full h-14 px-4 top-0 border-b shadow-sm z-50'>
