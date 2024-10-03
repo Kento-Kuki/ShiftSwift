@@ -38,6 +38,11 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
     <Card className='flex flex-col h-full'>
       <CardHeader>
         <div className='flex justify-between items-center text-gray-400 text-sm'>
+          <span>{shift.date.toISOString()}</span>
+          <span>
+            {shift.startTime.toISOString()} - {shift.endTime.toISOString()}
+          </span>
+          <span>{userTimezone}</span>
           <span>{format(date, 'yyyy-MM-dd', { timeZone: userTimezone })}</span>
           <span>
             {format(startTime, 'HH:mm', { timeZone: userTimezone })}-
