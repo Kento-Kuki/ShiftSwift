@@ -28,25 +28,20 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
     },
   });
 
+  const startTime = new Date(shift.startTime);
+  const endTime = new Date(shift.endTime);
+  const date = new Date(shift.date);
+
   const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   return (
     <Card className='flex flex-col h-full'>
       <CardHeader>
         <div className='flex justify-between items-center text-gray-400 text-sm'>
+          <span>{format(date, 'yyyy-MM-dd', { timeZone: userTimezone })}</span>
           <span>
-            {format(new Date(shift.date), 'yyyy-MM-dd', {
-              timeZone: userTimezone,
-            })}
-          </span>
-          <span>
-            {format(new Date(shift.startTime), 'HH:mm', {
-              timeZone: userTimezone,
-            })}
-            -
-            {format(new Date(shift.endTime), 'HH:mm', {
-              timeZone: userTimezone,
-            })}
+            {format(startTime, 'HH:mm', { timeZone: userTimezone })}-
+            {format(endTime, 'HH:mm', { timeZone: userTimezone })}
           </span>
         </div>
       </CardHeader>
