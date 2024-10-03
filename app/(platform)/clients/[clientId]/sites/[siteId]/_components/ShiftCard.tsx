@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import { Shift } from '@prisma/client';
-import { format } from 'date-fns-tz';
+import { format, toZonedTime } from 'date-fns-tz';
 
 import {
   Card,
@@ -12,7 +12,6 @@ import { db } from '@/lib/db';
 import ShiftEditModal from './ShiftEditModal';
 import { Button } from '@/components/ui/button';
 import ShiftAlertDialog from './ShiftAlertDialog';
-import { time } from 'console';
 
 interface ShiftCardProps {
   shift: Shift;
@@ -31,19 +30,19 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
 
   const startTime = new Date(shift.startTime);
   const endTime = new Date(shift.endTime);
-  const date = new Date(shift.date);
+  const date = toZonedTime(new Date(shift.date), 'Asia/Tokyo');
 
   // const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-  const timeZone = 'Asia/Tokyo';
 
   return (
     <Card className='flex flex-col h-full'>
       <CardHeader>
         <div className='flex justify-between items-center text-gray-400 text-sm'>
-          <span>{format(date, 'yyyy-MM-dd', { timeZone: timeZone })}</span>
+          <span>{format(date, 'yyyy/MM/dd')}</span>
+          <span>{format(date, 'yyyy/MM/dd', { timeZone: 'Asia/Tokyo' })}</span>
           <span>
-            {format(startTime, 'HH:mm', { timeZone: timeZone })}-
-            {format(endTime, 'HH:mm', { timeZone: timeZone })}
+            {format(startTime, 'HH:mm', { timeZone: 'Asia/Tokyo' })}-
+            {format(endTime, 'HH:mm', { timeZone: 'Asia/Tokyo' })}
           </span>
         </div>
       </CardHeader>
