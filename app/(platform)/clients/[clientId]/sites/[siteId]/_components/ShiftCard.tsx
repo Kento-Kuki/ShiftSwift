@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { Shift } from '@prisma/client';
+import { format } from 'date-fns-tz';
 
 import {
   Card,
@@ -27,22 +28,24 @@ const ShiftCard = async ({ shift, clientId }: ShiftCardProps) => {
     },
   });
 
+  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+
   return (
     <Card className='flex flex-col h-full'>
       <CardHeader>
         <div className='flex justify-between items-center text-gray-400 text-sm'>
-          <span>{shift.date.toDateString()}</span>
           <span>
-            {shift.startTime.toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
+            {format(new Date(shift.date), 'yyyy-MM-dd', {
+              timeZone: userTimezone,
+            })}
+          </span>
+          <span>
+            {format(new Date(shift.startTime), 'HH:mm', {
+              timeZone: userTimezone,
             })}
             -
-            {shift.endTime.toLocaleTimeString([], {
-              hour: '2-digit',
-              minute: '2-digit',
-              hour12: false,
+            {format(new Date(shift.endTime), 'HH:mm', {
+              timeZone: userTimezone,
             })}
           </span>
         </div>
