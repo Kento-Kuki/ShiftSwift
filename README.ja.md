@@ -6,7 +6,7 @@ ShiftSwift は、効率的なシフト管理のために設計されたアプリ
 
 ShiftSwift : https://shiftswift.vercel.app/
 
-## デモ
+## デモ動画
 
 [![デモ動画](https://img.youtube.com/vi/4FGFS43r8Gs/0.jpg)](https://www.youtube.com/watch?v=4FGFS43r8Gs)
 
