@@ -6,7 +6,7 @@ Shiftswift is a streamlined app designed for efficient shift management. It prov
 
 Link here:https://shiftswift.vercel.app/
 
-## Demo
+## Demo video
 
 [![demo](https://img.youtube.com/vi/4FGFS43r8Gs/0.jpg)](https://www.youtube.com/watch?v=4FGFS43r8Gs)
 
