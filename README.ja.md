@@ -1,23 +1,37 @@
 # ShiftSwift
 
-ShiftSwift は私のポートフォリオプロジェクトです。ShiftSwift は次の技術を使用したスケジュール管理アプリケーションです。
+[English version README here](https://github.com/Kento-Kuki/ShiftSwift/blob/main/README.md)
 
-リンク：https://shiftswift.vercel.app/
+ShiftSwift は、効率的なシフト管理のために設計されたアプリです。直感的なインターフェースを提供し、ユーザーはシフトスケジュールを簡単に作成、編集、共有できます。ShiftSwift を使用することで、シフトの管理、スタッフのスケジュールの追跡、調整が簡単かつストレスなく行えます。
 
-## Tech Stack
+ShiftSwift : https://shiftswift.vercel.app/
 
-- **Next.js**: フロントエンドの React フレームワークとして使用されています。
-- **Supabase**: データベースと認証のために使用されています。
-- **Prisma**: データベースアクセスとオブジェクト関係マッピング（ORM）に使用されています。
-- **Zustand**: React アプリケーションの状態管理に使用されています。
-- **Shadcn UI**: UI コンポーネントライブラリとして統合されています。
-- **Tailwind CSS**: スタイリングに使用されています。
-- **Clerk**: 認証とユーザーアカウント管理に使用されています。
+## デモ
+
+[![デモ動画](https://img.youtube.com/vi/4FGFS43r8Gs/0.jpg)](https://www.youtube.com/watch?v=4FGFS43r8Gs)
+
+## 技術スタック
+
+- **Next.js**: フロントエンドの React フレームワークとして使用。
+- **Supabase**: データベースと認証に利用。
+- **Prisma**: データベースアクセスと ORM（オブジェクト関係マッピング）に使用。
+- **Zustand**: React アプリケーションの状態管理に利用。
+- **Shadcn UI**: UI コンポーネントライブラリとして統合。
+- **Tailwind CSS**: スタイリングに使用。
+- **Clerk**: 認証とユーザーアカウント管理に利用。
 
 ## 主な機能
 
-ShiftSwift には以下の主な機能が含まれています：
+ShiftSwift には以下の主要機能があります：
 
-- クライアント、サイト、シフトの追加、編集、削除
-- カレンダーによるスケジュール管理
-- ユーザーの認証とログイン
+- クライアント、サイト、シフトの追加、編集、削除。
+- カレンダーを使ったスケジュール管理。
+- ユーザー認証とログイン機能。
+
+## デザイン
+
+Figma: [ShiftSwift デザイン](https://www.figma.com/design/hSiI6kcC1VzQLxR6xolrwN/ShiftSwift?node-id=0-1&t=ooH2g77BRDMCT4ek-0)
+
+## データベース
+
+![Shift-Management-App drawio](https://github.com/user-attachments/assets/31d3b6f7-fd27-46af-a639-4d09acab8cde)
